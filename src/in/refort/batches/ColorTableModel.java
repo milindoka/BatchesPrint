@@ -58,7 +58,8 @@ class ColorTableModel extends AbstractTableModel {
 
 }
 
-class ButtonHeaderRenderer extends JButton implements TableCellRenderer {
+class ButtonHeaderRenderer extends JButton implements TableCellRenderer
+{
     int pushedColumn;
 
     public ButtonHeaderRenderer() {
@@ -79,6 +80,8 @@ class ButtonHeaderRenderer extends JButton implements TableCellRenderer {
     public void setPressedColumn(int col) {
       pushedColumn = col;
     }
+    
+  
   }
 
 class HeaderListener extends MouseAdapter 
@@ -97,14 +100,12 @@ class HeaderListener extends MouseAdapter
       int col = header.columnAtPoint(e.getPoint());
       renderer.setPressedColumn(col);
       header.repaint();
-
-      
       
       JTable table = ((JTableHeader) e.getSource()).getTable();
       TableColumnModel columnModel = table.getColumnModel();
       int viewColumn = columnModel.getColumnIndexAtX(e.getX());
       int modelColumn = table.convertColumnIndexToModel(viewColumn);
-      if (modelColumn == 0 || modelColumn == 1) {
+      if ( modelColumn == 1) {
          // check.setSelected(!check.isSelected());
           TableModel m = table.getModel();
          // Boolean f = check.isSelected();
@@ -116,6 +117,9 @@ class HeaderListener extends MouseAdapter
           ((JTableHeader) e.getSource()).repaint();
          f=!f;
       }
+            
+      
+      
     }
 
     public void mouseReleased(MouseEvent e) {

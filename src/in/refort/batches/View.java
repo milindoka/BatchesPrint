@@ -1,24 +1,17 @@
 package in.refort.batches;
 
-
-
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-
-
-
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class View {
-	
-	
-      
-    private JFrame frame;
+
+	private JFrame frame;
     private JLabel label;
     private JButton button;
     private JLabel prname;
@@ -28,13 +21,10 @@ public class View {
     private JTable table;
 
     
-    
-    
-    
     public View(String text)
     {   
     	TableModel model = new ColorTableModel();
-        JTable table = new JTable(model);
+        final JTable table = new JTable(model);
         
         ButtonHeaderRenderer renderer = new ButtonHeaderRenderer();
         TableColumnModel cmodel = table.getColumnModel();
@@ -42,14 +32,10 @@ public class View {
         table.getColumnModel().getColumn(1).setMinWidth(100);
         
         table.getColumnModel().getColumn(1).setMaxWidth(100);
-        
-        
-        //int n=cmodel.getColumnCount();
-        //int n = 2;//headerStr.length;
-        //for (int i = 0; i < n; i++) {
-          cmodel.getColumn(1).setHeaderRenderer(renderer);
-     //   }
-
+    
+        cmodel.getColumn(0).setHeaderRenderer(renderer);
+        cmodel.getColumn(1).setHeaderRenderer(renderer);
+    
         JTableHeader header = table.getTableHeader();
         header.addMouseListener(new HeaderListener(header, renderer));
         
@@ -57,6 +43,22 @@ public class View {
         
         JScrollPane scrollPane = new JScrollPane(table);
        
+        
+        
+        
+
+     // listener
+     table.getTableHeader().addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseClicked(MouseEvent e) {
+             int col = table.columnAtPoint(e.getPoint());
+             String name = table.getColumnName(col);
+             System.out.println("Column index selected " + col + " " + name);
+         }
+     });
+        
+        
+        
     	
         
         label = new JLabel(text);

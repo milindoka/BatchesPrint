@@ -32,5 +32,6 @@ public class Controller {
     private void linkBtnAndLabel(){
         model.incX();                
         view.setText(Integer.toString(model.getX()));
+        
     }    
 }
