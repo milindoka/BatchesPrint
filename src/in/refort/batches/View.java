@@ -18,13 +18,13 @@ public class View {
     private JButton setPrinterButton;
     private JButton printButton;
     private JButton browseButton;
-    private JTable table;
+    TableModel model = new ColorTableModel();
+    final JTable table = new JTable(model);
 
     
     public View(String text)
     {   
-    	TableModel model = new ColorTableModel();
-        final JTable table = new JTable(model);
+    	
         
         ButtonHeaderRenderer renderer = new ButtonHeaderRenderer();
         TableColumnModel cmodel = table.getColumnModel();
@@ -40,26 +40,9 @@ public class View {
         header.addMouseListener(new HeaderListener(header, renderer));
         
         
-        
         JScrollPane scrollPane = new JScrollPane(table);
        
         
-        
-        
-
-     // listener
-     table.getTableHeader().addMouseListener(new MouseAdapter() {
-         @Override
-         public void mouseClicked(MouseEvent e) {
-             int col = table.columnAtPoint(e.getPoint());
-             String name = table.getColumnName(col);
-             System.out.println("Column index selected " + col + " " + name);
-         }
-     });
-        
-        
-        
-    	
         
         label = new JLabel(text);
        // frame.getContentPane().add(label, BorderLayout.CENTER);
@@ -135,7 +118,10 @@ public class View {
     
  
 
-    
+   public JTable getTable()
+   {
+	   return table;
+   }
     
         
     public JButton getButton(){

@@ -1,14 +1,11 @@
 package in.refort.batches;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.JTableHeader;
@@ -17,14 +14,12 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 
-
-
 class ColorTableModel extends AbstractTableModel {
 
-  Object rowData[][] = { { "1", Boolean.TRUE }, { "2", Boolean.TRUE }, { "3", Boolean.FALSE },
+Object rowData[][] = { { "1", Boolean.TRUE }, { "2", Boolean.TRUE }, { "3", Boolean.FALSE },
       { "4", Boolean.TRUE }, { "5", Boolean.FALSE }, };
 
-  String columnNames[] = { "Batch Files", "(Un)Select All" };
+  String columnNames[] = { "Click To Print Batches", "(Un)Select All" };
 
   public int getColumnCount() {
     return columnNames.length;
@@ -122,7 +117,9 @@ class HeaderListener extends MouseAdapter
       
     }
 
-    public void mouseReleased(MouseEvent e) {
+    
+    public void mouseReleased(MouseEvent e) 
+    {
       int col = header.columnAtPoint(e.getPoint());
       renderer.setPressedColumn(-1); // clear
       header.repaint();
