@@ -12,17 +12,14 @@ import java.awt.event.MouseEvent;
 public class View {
 
 	private JFrame frame;
-    private JLabel label;
-    private JButton button;
+   
     private JLabel prname;
     private JButton setPrinterButton;
-    private JButton printButton;
-    private JButton browseButton;
     TableModel model = new ColorTableModel();
     final JTable table = new JTable(model);
 
     
-    public View(String text)
+    public View(String title)
     {   
     	
         
@@ -44,15 +41,15 @@ public class View {
        
         
         
-        label = new JLabel(text);
+        prname = new JLabel("");
        // frame.getContentPane().add(label, BorderLayout.CENTER);
         
-        button = new JButton("Button");        
+        setPrinterButton = new JButton("Set Printer");        
        // frame.getContentPane().add(button, BorderLayout.SOUTH);
         JPanel TopPanel = new JPanel();
         TopPanel.setLayout(new GridLayout(1,2));
-    	TopPanel.add(button);
-    	TopPanel.add(label);
+    	TopPanel.add(setPrinterButton);
+    	TopPanel.add(prname);
     	
     	
     	frame = new JFrame("View");                                    
@@ -124,16 +121,13 @@ public class View {
    }
     
         
-    public JButton getButton(){
-        return button;
+    public JButton getPrinterButton(){
+        return setPrinterButton;
     }
     
-    public void setText(String text){
-        label.setText(text);
+    public void setPrinterLabel(String text){
+        prname.setText("   "+text);
     }
-    
-    
-    
     
     
     

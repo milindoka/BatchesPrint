@@ -6,21 +6,21 @@ public class Model {
     
     private int x;
     private String path;
-    public Model(){
-        x = 0;
-    }
-    
-    public Model(int x)  ///// Model Constructor
+    private String PrinterName;
+    public Model()
     {
-        this.x = x;
+        PrinterName = "No Printer Selected";
     }
     
-    public void incX(){
-        x++;
+        
+    public String getPrinterName()
+    {
+        return PrinterName;
     }
-    
-    public int getX(){
-        return x;
+
+    public void setPrinterName(String PrinterName)
+    {
+        this.PrinterName=PrinterName;
     }
     
     public String getJarPath()

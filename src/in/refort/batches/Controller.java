@@ -1,4 +1,5 @@
 package in.refort.batches;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -24,11 +25,12 @@ public class Controller {
     {        
         actionListener = new ActionListener()
         {
-              public void actionPerformed(ActionEvent actionEvent) {                  
-                  linkBtnAndLabel();
+              public void actionPerformed(ActionEvent actionEvent)
+              {                  
+            	  setPrinterButtonClicked();
               }
         };                
-        view.getButton().addActionListener(actionListener);   
+        view.getPrinterButton().addActionListener(actionListener);   
     
     
        
@@ -47,15 +49,20 @@ public class Controller {
         };
 
         view.getTable().getTableHeader().addMouseListener(mouseAdapter);
-     
-      
+       
+        
+        SetPrinter sp=new SetPrinter();
+        String printername=sp.LoadPreferences();
+        model.setPrinterName(printername);
+        view.setPrinterLabel(printername);       
     }
     
-    private void linkBtnAndLabel()
+    private void setPrinterButtonClicked()
     {
-        model.incX();                
-        view.setText(Integer.toString(model.getX()));
-        
+    	SetPrinter sp=new SetPrinter();
+        String printername=sp.SelectPrinter();
+        model.setPrinterName(printername);
+        view.setPrinterLabel(printername);
     }
     
     private void TablePrintButtonClicked()
