@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Model {
     
     private int x;
-    public int TotalMarklists=0;
+    public int TotalBatches=0;
     private String path;
     private String PrinterName;
     

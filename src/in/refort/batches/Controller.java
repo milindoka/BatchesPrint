@@ -16,7 +16,8 @@ public class Controller {
     private ActionListener actionListener;
     private MouseAdapter mouseAdapter;
     private boolean f=true;
-   
+    private Print pr=new Print();
+    
     public Controller(Model model, View view)
     {
         this.model = model;
@@ -75,7 +76,7 @@ public class Controller {
         String JarPath=model.getJarPath(); ///set JAR path in model variable path;
         
         listfiles(JarPath);   ///collect all mrk filenames with path in file array
-    	String frametitle=String.format("Total Marklists : %d", model.TotalMarklists);
+    	String frametitle=String.format("Total Batches : %d", model.TotalBatches);
     	//view.setTitle(frametitle);
         System.out.println(JarPath);
         System.out.println(frametitle);
@@ -95,13 +96,10 @@ public class Controller {
     {
         Boolean temp;
     	for (int i = 0; i < view.getTable().getRowCount(); i++)
-            
-                 // view.getTable().getModel().setValueAt(f, i,1);
-        
-    	
     	{	temp=(Boolean) GetData(i,1);
         if(temp) System.out.println(i);
     	}
+    	
    //   	((DefaultTableModel) view.table.getModel()).addRow(new Object[]{ "", false});
     
     }
@@ -135,15 +133,15 @@ public class Controller {
   	      }
   	        
   	   SortArrays();
-  	  model.TotalMarklists=model.pathArray.size();
+  	  model.TotalBatches=model.pathArray.size();
   	  //show(TotalMarklists);
-       for(int i=0;i<model.TotalMarklists;i++)
+       for(int i=0;i<model.TotalBatches;i++)
     	   ((DefaultTableModel) view.table.getModel()).addRow(new Object[]{"  "+model.nameArray.get(i),true});
     	
   	   
   	      
   	   
-  	    return model.TotalMarklists;
+  	    return model.TotalBatches;
     }
 
     public void SortArrays()
