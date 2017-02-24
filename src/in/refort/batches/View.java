@@ -15,8 +15,8 @@ public class View {
    
     private JLabel prname;
     private JButton setPrinterButton;
-    TableModel model = new ColorTableModel();
-    final JTable table = new JTable(model);
+    public TableModel model1 = new MyTableModel();//ColorTableModel();
+    final JTable table = new JTable(model1);
 
     
     public View(String title)

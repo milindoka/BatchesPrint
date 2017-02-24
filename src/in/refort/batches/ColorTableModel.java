@@ -15,9 +15,11 @@ import javax.swing.table.TableModel;
 
 
 class ColorTableModel extends AbstractTableModel {
+	
+	
+	
 
-Object rowData[][] = { { "1", Boolean.TRUE }, { "2", Boolean.TRUE }, { "3", Boolean.FALSE },
-      { "4", Boolean.TRUE }, { "5", Boolean.FALSE }, };
+Object rowData[][] = { { "No Files In Jar Folder", Boolean.FALSE} };
 
   String columnNames[] = { "Click To Print Batches", "(Un)Select All" };
 
@@ -49,7 +51,8 @@ Object rowData[][] = { { "1", Boolean.TRUE }, { "2", Boolean.TRUE }, { "3", Bool
     return (column != 0);
   }
 
-
+  
+  
 
 }
 
