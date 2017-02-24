@@ -1,15 +1,20 @@
 package in.refort.batches;
 
+import java.awt.Component;
+import java.awt.Insets;
 import java.util.Vector;
 
+import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 
 
 public class MyTableModel extends DefaultTableModel {
 
   public MyTableModel() {
-    super(new String[]{"Name", "Select"}, 0);
+    super(new String[]{"Print Batch Files", "(Un)Select All"}, 0);
   }
 
   @Override
@@ -34,7 +39,7 @@ public class MyTableModel extends DefaultTableModel {
   @Override
   public void setValueAt(Object aValue, int row, int column) {
     if (aValue instanceof Boolean && column == 1) {
-      System.out.println(aValue);
+     // System.out.println(aValue);
       Vector rowData = (Vector)getDataVector().get(row);
       rowData.set(1, (boolean)aValue);
       fireTableCellUpdated(row, column);
@@ -42,3 +47,8 @@ public class MyTableModel extends DefaultTableModel {
   }
   
 }
+
+
+
+
+

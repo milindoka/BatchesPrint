@@ -2,10 +2,13 @@ package in.refort.batches;
 
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -134,3 +137,78 @@ public class View {
 }
 
 
+
+class HeaderListener extends MouseAdapter 
+ {  static Boolean f=false;
+    JTableHeader header;
+
+    ButtonHeaderRenderer renderer;
+
+    HeaderListener(JTableHeader header, ButtonHeaderRenderer renderer) {
+      this.header = header;
+      this.renderer = renderer;
+    }
+
+    public void mousePressed(MouseEvent e) 
+    {
+      int col = header.columnAtPoint(e.getPoint());
+      renderer.setPressedColumn(col);
+      header.repaint();
+      
+      JTable table = ((JTableHeader) e.getSource()).getTable();
+      TableColumnModel columnModel = table.getColumnModel();
+      int viewColumn = columnModel.getColumnIndexAtX(e.getX());
+      int modelColumn = table.convertColumnIndexToModel(viewColumn);
+      if ( modelColumn == 1) {
+         // check.setSelected(!check.isSelected());
+          TableModel m = table.getModel();
+         // Boolean f = check.isSelected();
+     //     Boolean f=true;
+         
+          for (int i = 0; i < m.getRowCount(); i++) {
+              m.setValueAt(f, i, modelColumn);
+          }
+          ((JTableHeader) e.getSource()).repaint();
+         f=!f;
+      }
+            
+      
+      
+    }
+
+    
+    public void mouseReleased(MouseEvent e) 
+    {
+      int col = header.columnAtPoint(e.getPoint());
+      renderer.setPressedColumn(-1); // clear
+      header.repaint();
+    }
+  }
+
+
+///////Required for Pushbutton Effect
+class ButtonHeaderRenderer extends JButton implements TableCellRenderer
+{
+    int pushedColumn;
+
+    public ButtonHeaderRenderer() {
+      pushedColumn = -1;
+      setMargin(new Insets(0, 0, 0, 0));
+    }
+
+    public Component getTableCellRendererComponent(JTable table,
+        Object value, boolean isSelected, boolean hasFocus, int row,
+        int column) {
+      setText((value == null) ? "" : value.toString());
+      boolean isPressed = (column == pushedColumn);
+      getModel().setPressed(isPressed);
+      getModel().setArmed(isPressed);
+      return this;
+    }
+
+    public void setPressedColumn(int col) {
+      pushedColumn = col;
+    }
+    
+  
+  }

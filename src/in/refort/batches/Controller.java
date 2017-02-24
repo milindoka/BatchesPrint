@@ -15,6 +15,7 @@ public class Controller {
     private View view;
     private ActionListener actionListener;
     private MouseAdapter mouseAdapter;
+    private boolean f=true;
    
     public Controller(Model model, View view){
         this.model = model;
@@ -36,6 +37,7 @@ public class Controller {
         };                
         view.getPrinterButton().addActionListener(actionListener);   
     
+        
     
        
         mouseAdapter=new MouseAdapter()
@@ -48,6 +50,17 @@ public class Controller {
             
                  
             	if(col==0) TablePrintButtonClicked();
+            	
+            	if(col==1)
+            	{f=!f;
+                for (int i = 0; i < view.getTable().getRowCount(); i++)
+                
+                    view.getTable().getModel().setValueAt(f, i,1);
+                
+            	}
+            	
+            	
+            	
             	
             }
         };
@@ -83,7 +96,7 @@ public class Controller {
     private void TablePrintButtonClicked()
     {
         System.out.println("Add Print Routine");
-      	((DefaultTableModel) view.table.getModel()).addRow(new Object[]{ "", false});
+   //   	((DefaultTableModel) view.table.getModel()).addRow(new Object[]{ "", false});
     
     }
     
