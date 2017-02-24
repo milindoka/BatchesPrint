@@ -1,20 +1,15 @@
 package in.refort.batches;
 
-import java.awt.Component;
-import java.awt.Insets;
 import java.util.Vector;
 
-import javax.swing.JButton;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 
 
 public class MyTableModel extends DefaultTableModel {
 
   public MyTableModel() {
-    super(new String[]{"Print Batch Files", "(Un)Select All"}, 0);
+    super(new String[]{"Print Selected Batches", "(Un)Select All"}, 0);
   }
 
   @Override

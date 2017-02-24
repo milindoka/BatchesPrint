@@ -18,20 +18,20 @@ public class View {
    
     private JLabel prname;
     private JButton setPrinterButton;
-    public TableModel model1 = new MyTableModel();//ColorTableModel();
-    final JTable table = new JTable(model1);
+    private TableModel tm = new MyTableModel();
+    final JTable table = new JTable(tm);
 
     
-    public View(String title)
+    public View()
     {   
     	
         
         ButtonHeaderRenderer renderer = new ButtonHeaderRenderer();
         TableColumnModel cmodel = table.getColumnModel();
         
-        table.getColumnModel().getColumn(1).setMinWidth(100);
+        table.getColumnModel().getColumn(1).setMinWidth(110);
         
-        table.getColumnModel().getColumn(1).setMaxWidth(100);
+        table.getColumnModel().getColumn(1).setMaxWidth(110);
     
         cmodel.getColumn(0).setHeaderRenderer(renderer);
         cmodel.getColumn(1).setHeaderRenderer(renderer);
@@ -45,10 +45,8 @@ public class View {
         
         
         prname = new JLabel("");
-       // frame.getContentPane().add(label, BorderLayout.CENTER);
         
         setPrinterButton = new JButton("Set Printer");        
-       // frame.getContentPane().add(button, BorderLayout.SOUTH);
         JPanel TopPanel = new JPanel();
         TopPanel.setLayout(new GridLayout(1,2));
     	TopPanel.add(setPrinterButton);
@@ -65,55 +63,10 @@ public class View {
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-    	frame.setSize(400,200);
+    	frame.setSize(400,300);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-    
-    /*    
-               
-
-        setPrinterButton=new JButton("Set Printer");
-        printButton=new JButton("Print");
-        browseButton=new JButton("Browse");
-    
-//    
-        
-        
-        
-        
-        TopPanel.setSize(50,50);
-        TopPanel.add(browseButton);
-        TopPanel.add(printButton);
-        TopPanel.add(setPrinterButton);
-        TopPanel.add(prname);
-        TopPanel.add(button);
-        TopPanel.add(label);
-        
-        table.setPreferredScrollableViewportSize(table.getPreferredSize());
-        JScrollPane scrollPane = new JScrollPane(table);
-       
-       // getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        //frame.getContentPane().setLayout(new BorderLayout());
-        //frame.getContentPane().add(TopPanel,BorderLayout.NORTH);
-       frame.getContentPane().add(scrollPane,BorderLayout.CENTER);
-        
-        
-       // getContentPane().add(TopPanel);
-       // getContentPane().add(scrollPane);
-        
-        File f = new File(System.getProperty("java.class.path"));
-    	File dir = f.getAbsoluteFile().getParentFile();
-    	String path = dir.toString();
-
-    	listfiles(path);   ///collect all mrk filenames with path in file array
-    	String frametitle=String.format("Total Marklists : %d", TotalMarklists);
-    	setTitle(frametitle);
-     //   show(path);
-
-  */  
-    	
-    
-    
+        frame.setTitle("BathesPrint 1.0") ;   	
     }
     
  
@@ -131,8 +84,6 @@ public class View {
     public void setPrinterLabel(String text){
         prname.setText("   "+text);
     }
-    
-    
     
 }
 
@@ -171,11 +122,8 @@ class HeaderListener extends MouseAdapter
           ((JTableHeader) e.getSource()).repaint();
          f=!f;
       }
-            
-      
       
     }
-
     
     public void mouseReleased(MouseEvent e) 
     {
@@ -183,7 +131,7 @@ class HeaderListener extends MouseAdapter
       renderer.setPressedColumn(-1); // clear
       header.repaint();
     }
-  }
+}
 
 
 ///////Required for Pushbutton Effect

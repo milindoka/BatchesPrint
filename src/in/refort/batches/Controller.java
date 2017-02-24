@@ -17,12 +17,10 @@ public class Controller {
     private MouseAdapter mouseAdapter;
     private boolean f=true;
    
-    public Controller(Model model, View view){
+    public Controller(Model model, View view)
+    {
         this.model = model;
         this.view = view;
-       // String path;
-     
-	    
                           
     }
     
@@ -53,9 +51,9 @@ public class Controller {
             	
             	if(col==1)
             	{f=!f;
-                for (int i = 0; i < view.getTable().getRowCount(); i++)
+                for (int i = 0; i < view.getTable().getRowCount(); i++) SetData(f,i,1);
                 
-                    view.getTable().getModel().setValueAt(f, i,1);
+        //            view.getTable().getModel().setValueAt(f, i,1);
                 
             	}
             	
@@ -95,7 +93,15 @@ public class Controller {
     
     private void TablePrintButtonClicked()
     {
-        System.out.println("Add Print Routine");
+        Boolean temp;
+    	for (int i = 0; i < view.getTable().getRowCount(); i++)
+            
+                 // view.getTable().getModel().setValueAt(f, i,1);
+        
+    	
+    	{	temp=(Boolean) GetData(i,1);
+        if(temp) System.out.println(i);
+    	}
    //   	((DefaultTableModel) view.table.getModel()).addRow(new Object[]{ "", false});
     
     }
@@ -132,10 +138,8 @@ public class Controller {
   	  model.TotalMarklists=model.pathArray.size();
   	  //show(TotalMarklists);
        for(int i=0;i<model.TotalMarklists;i++)
-    	   ((DefaultTableModel) view.table.getModel()).addRow(new Object[]{model.nameArray.get(i),true});
-    	 //  System.out.println(model.nameArray.get(i));
-       //  {if(i>0) AddRow(); // since one row is already there
-       //   SetData(" "+model.nameArray.get(i),i,0);}
+    	   ((DefaultTableModel) view.table.getModel()).addRow(new Object[]{"  "+model.nameArray.get(i),true});
+    	
   	   
   	      
   	   
