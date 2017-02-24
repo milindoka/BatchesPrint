@@ -58,9 +58,6 @@ public class Controller {
                 
             	}
             	
-            	
-            	
-            	
             }
         };
 
@@ -95,13 +92,16 @@ public class Controller {
     private void TablePrintButtonClicked()
     {
         Boolean temp;
+      
     	for (int i = 0; i < view.getTable().getRowCount(); i++)
     	{	temp=(Boolean) GetData(i,1);
-        if(temp) System.out.println(i);
+              if(temp)
+            	  
+            	  pr.PrintBatch(model.pathArray.get(i),model.getPrinterName(),model.nameArray.get(i));
+            	  
+            	
     	}
     	
-   //   	((DefaultTableModel) view.table.getModel()).addRow(new Object[]{ "", false});
-    
     }
     
     
@@ -138,9 +138,6 @@ public class Controller {
        for(int i=0;i<model.TotalBatches;i++)
     	   ((DefaultTableModel) view.table.getModel()).addRow(new Object[]{"  "+model.nameArray.get(i),true});
     	
-  	   
-  	      
-  	   
   	    return model.TotalBatches;
     }
 
@@ -156,8 +153,6 @@ public class Controller {
     	     
     	     }
     	 }
-    	
-    	
     	
     }
 

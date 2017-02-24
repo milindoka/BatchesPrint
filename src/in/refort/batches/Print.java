@@ -23,13 +23,13 @@ import javax.swing.JOptionPane;
 
 public class Print implements Printable
 {	
-	public  ArrayList<String> fileArray = new ArrayList<String>();
+	
 	public  ArrayList<String> strArray = new ArrayList<String>();
 	public  ArrayList<String> rollArray = new ArrayList<String>();
-	public  ArrayList<String> markArray = new ArrayList<String>();
 	
 	
-	
+	String filebeingprinted;
+	int totalpages=0;
 	int TotalBatches=0;
 	int CurrentBatch=0;
 	String CollegeName1;
@@ -75,18 +75,16 @@ public class Print implements Printable
 	///// Here the whole  JAVA Printing Mechanism Starts 
 	/////  Note 'implements Printable above', It includes the Print Mechanism to our Program
 	/////
-	  public void PrintAllBatches(String printername)
+	  public void PrintBatch(String filepath,String printername,String filename)
               {
 		  
-		  TotalBatches=fileArray.size();
+		  filebeingprinted=filename;
 		  PrintService ps = findPrintService(printername);
 		  if(ps==null) ps = PrintServiceLookup.lookupDefaultPrintService(); 
 		  if(ps==null) return;
 		   
-		   if(TotalBatches==0)
-		    CurrentBatch=0;
-		  
 	         PrinterJob job = PrinterJob.getPrinterJob();
+	         job.setJobName(filename);
 	         try {
 				job.setPrintService(ps);
 			} catch (PrinterException e) {
@@ -102,6 +100,9 @@ public class Print implements Printable
 	         pattribs.add(new MediaPrintableArea(0, 0, 210, 297, MediaPrintableArea.MM));
 	         // 210 x 297  A4 size paper in Millimiters.
 	         
+	         
+	         
+	         
 	  
 	         boolean ok = true; ///job.printDialog();
 	         if (ok) 
@@ -113,15 +114,18 @@ public class Print implements Printable
               
 	         }
 	
-	  public void PrintHeader(Graphics pg,int px,int py)
+	  public void PrintHeader(Graphics pg,int px,int py,int pageno)
 	  {//Centre(CollegeName1,450,px,py,pg);
-	 
+	 /*
 	  pg.drawString("Subject :"+Subject,px+200, py+17);
 	  pg.drawString("Examiner : "+(Examiner.length()>9 ? Examiner.substring(0, 8) : Examiner),px+400,py+17);
       pg.drawString("Examination : "+Examination,px, py+34);
       
       pg.drawString("Date : "+Date,px+400, py+34);
+		*/ 
 		  
+		  pg.drawString(filebeingprinted,px,py);
+	///	  CurrentBatch++;
 	  }
 	  
 	  
@@ -130,7 +134,7 @@ public class Print implements Printable
 	{
 		
 		
-		 if (pageno>TotalBatches-1)             // We have only one page, and 'page no' is zero-based
+		 if (pageno>totalpages)             // We have only one page, and 'page no' is zero-based
 		    {  return NO_SUCH_PAGE;  // After NO_SUCH_PAGE, printer will stop printing.
 	        }
 		 
@@ -138,16 +142,17 @@ public class Print implements Printable
 		 Font MyFont = new Font("Liberation Serif", Font.PLAIN,10);
 		 pg.setFont(MyFont); 
          
-	     ReadFromDisk(fileArray.get(pageno));
+	//     ReadFromDisk(fileArray.get(pageno));
 	//	 Fillrollmarks();
 		 
 		 
          int tlx=70,tly=28,cellheight=15,cellwidth=64;
                
-         PrintHeader(pg,tlx,tly);
+         PrintHeader(pg,tlx,tly,pageno);
         
   //       PrintGrid(tlx,tly+48,cellheight,cellwidth,10,5,pg);   
-         CurrentBatch++;
+        
+        System.out.println(pageno);
 		return PAGE_EXISTS;
 	 }
 ///// Here the JAVA Printing Mechanism Ends
