@@ -32,6 +32,9 @@ public class Print implements Printable
 	int totalpages=0;
 	int TotalBatches=0;
 	int CurrentBatch=0;
+	private String BoardName1="Maharashtra State Board of Secondary & Higher Secondary Education,";
+    private String BoardName2="Mumbai Divisional Board, Vashi, Navi Mumbai - 400703";
+    private String MonthYear="Feb/March-2018";
 
     private String School,Index,Stream,Standard,Subject,SubjectCode,Type,BatchNo,BatchCreator,
                    Email1,Email2,Det,Tyme,Session;
@@ -136,13 +139,11 @@ public class Print implements Printable
 		 Font MyFont = new Font("Liberation Serif", Font.PLAIN,10);
 		 pg.setFont(MyFont); 
          
-	//     ReadFromDisk(fileArray.get(pageno));
-	//	 Fillrollmarks();
+		  PrintFormHeader(pg,pageno);
 		 
-		 
-         int tlx=70,tly=28,cellheight=15,cellwidth=64;
+     //    int tlx=70,tly=28,cellheight=15,cellwidth=64;
                
-         PrintHeader(pg,tlx,tly,pageno);
+         //PrintHeader(pg,tlx,tly,pageno);
         
   //       PrintGrid(tlx,tly+48,cellheight,cellwidth,10,5,pg);   
         
@@ -187,7 +188,7 @@ public class Print implements Printable
 		Stream=strArray.get(3);
 		Standard=strArray.get(4);
 		Subject=strArray.get(5);
-		Subject=strArray.get(6);
+		SubjectCode=strArray.get(6);
 		Type=strArray.get(7);
 		BatchNo=strArray.get(8);
 		BatchCreator=strArray.get(9);
@@ -210,6 +211,36 @@ public class Print implements Printable
 	        g2d.drawString(s, start + XPos, YPos);  
 	 }
 	
-	
+	 public void PrintFormHeader(Graphics gr,int pageno)
+	  { int topleftx=74,toplefty=10,linespacing = 16;
+		
+	     
+	  String StartSeatNo=rollArray.get(0);
+	  String EndSeatNo=rollArray.get(rollArray.size()-1);
+	   
+	 
+	   Centre(BoardName1,460,topleftx,toplefty,gr);
+	   toplefty+=linespacing;
+	   Centre(BoardName2,460,topleftx,toplefty,gr);
+	   toplefty+=linespacing;
+	   Centre(Standard+Type+" - "+MonthYear,460,topleftx,toplefty,gr);
+	   toplefty+=linespacing;
+	   Centre("Attendance Sheet",460,topleftx,toplefty,gr);
+	   toplefty+=linespacing;
+	  linespacing=12;
+	   
+	   gr.drawString("School/College/Centre : "+School,topleftx,toplefty);
+	  gr.drawString("Batch No :  "+BatchNo,topleftx+340,toplefty);
+	  toplefty+=linespacing;
+	  gr.drawString("Subject : "+Subject,topleftx,toplefty);
+	  gr.drawString("Date :  "+Det,topleftx+340,toplefty);
+	  toplefty+=linespacing;
+	  gr.drawString("Seat No.s : From  "+StartSeatNo+"  TO  "+EndSeatNo,topleftx,toplefty);
+	  
+	  gr.drawString("Time :  "+Tyme,topleftx+340,toplefty);
+	  toplefty+=linespacing;
+	  gr.drawString("Extra Seat No.s :",topleftx,toplefty);
+	  }
+
 
 }
