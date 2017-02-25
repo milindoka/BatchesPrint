@@ -53,14 +53,9 @@ public class Controller {
             	if(col==1)
             	{f=!f;
                 for (int i = 0; i < view.getTable().getRowCount(); i++) SetData(f,i,1);
-                
-        //            view.getTable().getModel().setValueAt(f, i,1);
-                
             	}
-            	
             }
         };
-
         view.getTable().getTableHeader().addMouseListener(mouseAdapter);
        
         
@@ -74,11 +69,10 @@ public class Controller {
         
         listfiles(JarPath);   ///collect all mrk filenames with path in file array
     	String frametitle=String.format("Total Batches : %d", model.TotalBatches);
-    	//view.setTitle(frametitle);
         System.out.println(JarPath);
         System.out.println(frametitle);
         
-        
+        /////End of Initial Update
     }
     
     private void setPrinterButtonClicked()

@@ -32,15 +32,14 @@ public class Print implements Printable
 	int totalpages=0;
 	int TotalBatches=0;
 	int CurrentBatch=0;
-	String CollegeName1;
-	String Clas;
-	String Stream;// = new String[TL];
-	String Subject;// = new String[TL];
-	String Examination;// = new String[TL];
-	String Examiner;
-	String Date;// = new String[TL];
-	String FirstRoll;
-	String LastRoll;
+
+    private String School,Index,Stream,Standard,Subject,SubjectCode,Type,BatchNo,BatchCreator,
+                   Email1,Email2,Det,Tyme,Session;
+
+
+	
+	
+	
 	
 	  public void show(String msg) ///for debugging
 		{JOptionPane.showMessageDialog(null, msg);}
@@ -77,6 +76,9 @@ public class Print implements Printable
 	/////
 	  public void PrintBatch(String filepath,String printername,String filename)
               {
+		  
+		  ReadFromDisk(filepath);  ////Read all text lines  in strArray
+		  SetAllHeaderFields();    //// School, Index,Subject,Batch etc
 		  
 		  filebeingprinted=filename;
 		  PrintService ps = findPrintService(printername);
@@ -115,17 +117,9 @@ public class Print implements Printable
 	         }
 	
 	  public void PrintHeader(Graphics pg,int px,int py,int pageno)
-	  {//Centre(CollegeName1,450,px,py,pg);
-	 /*
-	  pg.drawString("Subject :"+Subject,px+200, py+17);
-	  pg.drawString("Examiner : "+(Examiner.length()>9 ? Examiner.substring(0, 8) : Examiner),px+400,py+17);
-      pg.drawString("Examination : "+Examination,px, py+34);
-      
-      pg.drawString("Date : "+Date,px+400, py+34);
-		*/ 
+	  {
+		  Centre(School,450,px,py,pg);
 		  
-		  pg.drawString(filebeingprinted,px,py);
-	///	  CurrentBatch++;
 	  }
 	  
 	  
@@ -174,5 +168,48 @@ public class Print implements Printable
 
         return null;
     }
+	
+	
+	public void SetAllHeaderFields()
+	{   
+		
+		String temp,stemp[];
+		for(int i=1;i<15;i++)
+		{stemp=strArray.get(i).split(":");
+		temp=stemp[1].trim();
+		strArray.set(i,temp);	
+		}
+		
+		
+		// line 0 is blank line
+		School=strArray.get(1); 
+		Index=strArray.get(2);
+		Stream=strArray.get(3);
+		Standard=strArray.get(4);
+		Subject=strArray.get(5);
+		Subject=strArray.get(6);
+		Type=strArray.get(7);
+		BatchNo=strArray.get(8);
+		BatchCreator=strArray.get(9);
+		Email1=strArray.get(10); 
+		Email2=strArray.get(11); 
+		Det=strArray.get(12);
+		Tyme=strArray.get(13);
+		Session=strArray.get(14);
+		
+		rollArray.removeAll(rollArray);
+		for(int i=20;i<strArray.size();i++) rollArray.add(strArray.get(i));
+		
+	}
+	
+
+	
+	 private void Centre(String s, int width, int XPos, int YPos,Graphics g2d){  
+	        int stringLen = (int)  g2d.getFontMetrics().getStringBounds(s, g2d).getWidth();  
+	        int start = width/2 - stringLen/2;  
+	        g2d.drawString(s, start + XPos, YPos);  
+	 }
+	
+	
 
 }
