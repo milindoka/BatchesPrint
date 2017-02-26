@@ -27,6 +27,9 @@ public class Print implements Printable
 	public  ArrayList<String> strArray = new ArrayList<String>();
 	public  ArrayList<String> rollArray = new ArrayList<String>();
 	
+	////--------------------------------------------------------------------
+	int TOPLEFTX=74,TOPLEFTY=10;  ////THE STRATING PRINT SPOT AT TOP LEFT CORNER
+    ////--------------------------------------------------------------------
 	
 	String filebeingprinted;
 	int totalpages=0;
@@ -39,10 +42,6 @@ public class Print implements Printable
     private String School,Index,Stream,Standard,Subject,SubjectCode,Type,BatchNo,BatchCreator,
                    Email1,Email2,Det,Tyme,Session;
 
-
-	
-	
-	
 	
 	  public void show(String msg) ///for debugging
 		{JOptionPane.showMessageDialog(null, msg);}
@@ -118,12 +117,6 @@ public class Print implements Printable
 	          
               
 	         }
-	
-	  public void PrintHeader(Graphics pg,int px,int py,int pageno)
-	  {
-		  Centre(School,450,px,py,pg);
-		  
-	  }
 	  
 	  
 	public int print(Graphics pg, PageFormat pf, int pageno)
@@ -139,13 +132,9 @@ public class Print implements Printable
 		 Font MyFont = new Font("Liberation Serif", Font.PLAIN,10);
 		 pg.setFont(MyFont); 
          
-		  PrintFormHeader(pg,pageno);
-		 
-     //    int tlx=70,tly=28,cellheight=15,cellwidth=64;
-               
-         //PrintHeader(pg,tlx,tly,pageno);
+		  PrintHeader(TOPLEFTX,TOPLEFTY,pg,pageno);
+		  PrintBoxedString("Test",TOPLEFTX,TOPLEFTY+116,100,16,pg);
         
-  //       PrintGrid(tlx,tly+48,cellheight,cellwidth,10,5,pg);   
         
         System.out.println(pageno);
 		return PAGE_EXISTS;
@@ -211,9 +200,8 @@ public class Print implements Printable
 	        g2d.drawString(s, start + XPos, YPos);  
 	 }
 	
-	 public void PrintFormHeader(Graphics gr,int pageno)
-	  { int topleftx=74,toplefty=10,linespacing = 16;
-		
+	 public void PrintHeader(int topleftx,int toplefty,Graphics gr,int pageno)
+	  { int linespacing = 16;
 	     
 	  String StartSeatNo=rollArray.get(0);
 	  String EndSeatNo=rollArray.get(rollArray.size()-1);
@@ -223,7 +211,7 @@ public class Print implements Printable
 	   toplefty+=linespacing;
 	   Centre(BoardName2,460,topleftx,toplefty,gr);
 	   toplefty+=linespacing;
-	   Centre(Standard+Type+" - "+MonthYear,460,topleftx,toplefty,gr);
+	   Centre(Standard+" - "+Type+" - "+MonthYear,460,topleftx,toplefty,gr);
 	   toplefty+=linespacing;
 	   Centre("Attendance Sheet",460,topleftx,toplefty,gr);
 	   toplefty+=linespacing;
@@ -242,5 +230,10 @@ public class Print implements Printable
 	  gr.drawString("Extra Seat No.s :",topleftx,toplefty);
 	  }
 
+	 
+	 void PrintBoxedString(String str,int tlx,int tly, int boxwidth, int boxheight, Graphics pg)
+	 {
+		 pg.drawRect(tlx, tly, boxwidth, boxheight);
+	 }
 
 }
