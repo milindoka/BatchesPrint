@@ -1,17 +1,14 @@
 package in.refort.batches;
 
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -30,9 +27,10 @@ public class Print implements Printable
 	
 	////--------------------------------------------------------------------
 	int TOPLEFTX=74,TOPLEFTY=10;  ////THE STRATING PRINT SPOT AT TOP LEFT CORNER
-	 int linespacing = 16;
+	 int linespacing = 12;
     ////--------------------------------------------------------------------
 	
+	 int colwidth[]={40,90,90,220};
 	String filebeingprinted;
 	int totalpages=0;
 	int TotalBatches=0;
@@ -135,8 +133,8 @@ public class Print implements Printable
 		 pg.setFont(MyFont); 
          
 		  PrintHeader(TOPLEFTX,TOPLEFTY,pg,pageno);
-		   PrintGridTitle(TOPLEFTX,TOPLEFTY+92,pg);
-		  TOPLEFTY+=linespacing;
+		  PrintGridTitle(TOPLEFTX,TOPLEFTY+92,pg);
+		  PrintGridMain(TOPLEFTX,TOPLEFTY+92+linespacing,pg);
 		 
         
         
@@ -219,8 +217,6 @@ public class Print implements Printable
 	   toplefty+=linespacing;
 	   Centre("Attendance Sheet",460,topleftx,toplefty,gr);
 	   toplefty+=linespacing;
-	  linespacing=12;
-	   
 	   gr.drawString("School/College/Centre : "+School,topleftx,toplefty);
 	  gr.drawString("Batch No :  "+BatchNo,topleftx+340,toplefty);
 	  toplefty+=linespacing;
@@ -250,9 +246,51 @@ public class Print implements Printable
 
 	 
 	 void PrintGridTitle(int tlx,int tly,Graphics pg)
-	 {
-		 PrintBoxedString("Sr",tlx,tly,40,linespacing,pg);
+	 {   linespacing=18;
+		 PrintBoxedString("Sr No",tlx,tly,colwidth[0],linespacing,pg);
+		 tlx+=colwidth[0];
+		 PrintBoxedString("Seat No",tlx,tly,colwidth[1],linespacing,pg);
+		 tlx+=colwidth[1];
+		 PrintBoxedString("Session",tlx,tly,colwidth[2],linespacing,pg);
+		 tlx+=colwidth[2];
+		 PrintBoxedString("Students's Signature",tlx,tly,colwidth[3],linespacing,pg);
 	 }
+	 
+	 void PrintGridMain(int tlx,int tly,Graphics pg)
+	 {   String srno;
+	     int leftx;
+		 for(int i=0;i<32;i++)
+	       { if(i>=rollArray.size())  ///print empty grid
+	       {leftx=tlx;
+			 
+		     PrintBoxedString(" ",leftx,tly,colwidth[0],linespacing,pg);
+             leftx+=colwidth[0];	       
+		     PrintBoxedString(" ",leftx,tly,colwidth[1],linespacing,pg);
+		     leftx+=colwidth[1];
+		     PrintBoxedString(" ",leftx,tly,colwidth[2],linespacing,pg);
+		     leftx+=colwidth[2];
+		      PrintBoxedString("",leftx,tly,colwidth[3],linespacing,pg);
+		      tly+=linespacing;
+	    	   
+	       }
+	    	   
+	       else   ///print filled Grid
+	       {
+			 leftx=tlx;
+			 srno=String.format("%d",i+1);
+		     PrintBoxedString(srno,leftx,tly,colwidth[0],linespacing,pg);
+             leftx+=colwidth[0];	       
+		     PrintBoxedString(rollArray.get(i),leftx,tly,colwidth[1],linespacing,pg);
+		     leftx+=colwidth[1];
+		     PrintBoxedString(Session,leftx,tly,colwidth[2],linespacing,pg);
+		     leftx+=colwidth[2];
+		      PrintBoxedString("",leftx,tly,colwidth[3],linespacing,pg);
+		      tly+=linespacing;
+	       }
+	    }
+	 }
+	 
+	 
 	 
 	 
 }
