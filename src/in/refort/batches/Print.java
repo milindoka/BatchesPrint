@@ -1,6 +1,7 @@
 package in.refort.batches;
 
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
@@ -29,6 +30,7 @@ public class Print implements Printable
 	
 	////--------------------------------------------------------------------
 	int TOPLEFTX=74,TOPLEFTY=10;  ////THE STRATING PRINT SPOT AT TOP LEFT CORNER
+	 int linespacing = 16;
     ////--------------------------------------------------------------------
 	
 	String filebeingprinted;
@@ -133,7 +135,9 @@ public class Print implements Printable
 		 pg.setFont(MyFont); 
          
 		  PrintHeader(TOPLEFTX,TOPLEFTY,pg,pageno);
-		  PrintBoxedString("Test",TOPLEFTX,TOPLEFTY+116,100,16,pg);
+		   PrintGridTitle(TOPLEFTX,TOPLEFTY+92,pg);
+		  TOPLEFTY+=linespacing;
+		 
         
         
         System.out.println(pageno);
@@ -201,7 +205,7 @@ public class Print implements Printable
 	 }
 	
 	 public void PrintHeader(int topleftx,int toplefty,Graphics gr,int pageno)
-	  { int linespacing = 16;
+	  {
 	     
 	  String StartSeatNo=rollArray.get(0);
 	  String EndSeatNo=rollArray.get(rollArray.size()-1);
@@ -229,11 +233,26 @@ public class Print implements Printable
 	  toplefty+=linespacing;
 	  gr.drawString("Extra Seat No.s :",topleftx,toplefty);
 	  }
-
+	 
+	 
 	 
 	 void PrintBoxedString(String str,int tlx,int tly, int boxwidth, int boxheight, Graphics pg)
 	 {
 		 pg.drawRect(tlx, tly, boxwidth, boxheight);
+	 
+		 int stringLen = (int)  pg.getFontMetrics().getStringBounds(str, pg).getWidth(); 
+		 int stringHeight=(int) pg.getFontMetrics().getStringBounds(str, pg).getHeight();
+		 
+	        int start = boxwidth/2 - stringLen/2;  
+	        pg.drawString(str, start + tlx, tly+(boxheight-stringHeight)/2 +stringHeight-2);
+	        
 	 }
 
+	 
+	 void PrintGridTitle(int tlx,int tly,Graphics pg)
+	 {
+		 PrintBoxedString("Sr",tlx,tly,40,linespacing,pg);
+	 }
+	 
+	 
 }
