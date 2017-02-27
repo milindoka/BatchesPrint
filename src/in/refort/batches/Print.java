@@ -26,7 +26,7 @@ public class Print implements Printable
 	public  ArrayList<String> rollArray = new ArrayList<String>();
 	
 	////--------------------------------------------------------------------
-	int TOPLEFTX=74,TOPLEFTY=10;  ////THE STRATING PRINT SPOT AT TOP LEFT CORNER
+	int TOPLEFTX=74,TOPLEFTY=20;  ////THE STRATING PRINT SPOT AT TOP LEFT CORNER
 	 int linespacing = 12;
     ////--------------------------------------------------------------------
 	
@@ -132,10 +132,11 @@ public class Print implements Printable
 		 Font MyFont = new Font("Liberation Serif", Font.PLAIN,10);
 		 pg.setFont(MyFont); 
          
-		  PrintHeader(TOPLEFTX,TOPLEFTY,pg,pageno);
-		  PrintGridTitle(TOPLEFTX,TOPLEFTY+92,pg);
-		  PrintGridMain(TOPLEFTX,TOPLEFTY+92+linespacing,pg);
-		  PrintFooter(TOPLEFTX,TOPLEFTY+720,pg);
+		  PrintIndexNumber(TOPLEFTX,TOPLEFTY,pg);
+		  PrintHeader(TOPLEFTX,TOPLEFTY+20,pg,pageno);
+		  PrintGridTitle(TOPLEFTX,TOPLEFTY+118,pg);
+		  PrintGridMain(TOPLEFTX,TOPLEFTY+118+linespacing,pg);
+		  PrintFooter(TOPLEFTX,TOPLEFTY+740,pg);
 		 
         
         
@@ -203,6 +204,13 @@ public class Print implements Printable
 	        g2d.drawString(s, start + XPos, YPos);  
 	 }
 	
+	 
+	 public void PrintIndexNumber(int topleftx,int toplefty, Graphics gr)
+	 {	   gr.drawString("College Index Number",topleftx+70,toplefty);
+	       
+		 
+	 }
+	 
 	 public void PrintHeader(int topleftx,int toplefty,Graphics gr,int pageno)
 	  {linespacing=12;
 	     
@@ -299,13 +307,19 @@ public class Print implements Printable
 	   gr.drawString("Internal Examiner",topleftx,toplefty);
 	   gr.drawString("External Examiner",topleftx+150,toplefty);
 	   gr.drawString("Signature of Head of the Jr. College",topleftx+300,toplefty);
-	   topleftx+=linespacing;
-	/*
-	   gr.drawString("Internal Examiner",topleftx,toplefty);
+	   toplefty+=linespacing;
+	   
 	   gr.drawString("Name & Signature",topleftx,toplefty); 
-	   gr.drawString("Name & Signature",topleftx,toplefty);
-	   gr.drawString("With Rubber Stamp",topleftx,toplefty);
-	 */
+	   gr.drawString("Name & Signature",topleftx+150,toplefty);
+	   gr.drawString("With Rubber Stamp",topleftx+320,toplefty);
+	   toplefty+=linespacing;
+	   toplefty+=linespacing;
+	   gr.drawString("Note :",topleftx,toplefty);
+	   toplefty+=linespacing;
+	   toplefty+=linespacing;
+	   gr.drawString("1. Submit to Board with Practical Marksheet.   2. Write ABSENT with Red Ink   3. Write Extra No.s if any.",
+			   topleftx,toplefty);
+	
 	  
 	  }
 	 
