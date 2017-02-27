@@ -135,6 +135,7 @@ public class Print implements Printable
 		  PrintHeader(TOPLEFTX,TOPLEFTY,pg,pageno);
 		  PrintGridTitle(TOPLEFTX,TOPLEFTY+92,pg);
 		  PrintGridMain(TOPLEFTX,TOPLEFTY+92+linespacing,pg);
+		  PrintFooter(TOPLEFTX,TOPLEFTY+720,pg);
 		 
         
         
@@ -203,7 +204,7 @@ public class Print implements Printable
 	 }
 	
 	 public void PrintHeader(int topleftx,int toplefty,Graphics gr,int pageno)
-	  {
+	  {linespacing=12;
 	     
 	  String StartSeatNo=rollArray.get(0);
 	  String EndSeatNo=rollArray.get(rollArray.size()-1);
@@ -290,6 +291,23 @@ public class Print implements Printable
 	    }
 	 }
 	 
+	 
+	 
+	 public void PrintFooter(int topleftx,int toplefty,Graphics gr)
+	  {
+	     linespacing=12;
+	   gr.drawString("Internal Examiner",topleftx,toplefty);
+	   gr.drawString("External Examiner",topleftx+150,toplefty);
+	   gr.drawString("Signature of Head of the Jr. College",topleftx+300,toplefty);
+	   topleftx+=linespacing;
+	/*
+	   gr.drawString("Internal Examiner",topleftx,toplefty);
+	   gr.drawString("Name & Signature",topleftx,toplefty); 
+	   gr.drawString("Name & Signature",topleftx,toplefty);
+	   gr.drawString("With Rubber Stamp",topleftx,toplefty);
+	 */
+	  
+	  }
 	 
 	 
 	 
