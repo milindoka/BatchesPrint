@@ -132,11 +132,11 @@ public class Print implements Printable
 		 Font MyFont = new Font("Liberation Serif", Font.PLAIN,10);
 		 pg.setFont(MyFont); 
          
-		  PrintIndexNumber(TOPLEFTX,TOPLEFTY,pg);
+		  PrintIndexNumber(TOPLEFTX+120,TOPLEFTY,pg);
 		  PrintHeader(TOPLEFTX,TOPLEFTY+20,pg,pageno);
 		  PrintGridTitle(TOPLEFTX,TOPLEFTY+118,pg);
 		  PrintGridMain(TOPLEFTX,TOPLEFTY+118+linespacing,pg);
-		  PrintFooter(TOPLEFTX,TOPLEFTY+740,pg);
+		  PrintFooter(TOPLEFTX,TOPLEFTY+760,pg);
 		 
         
         
@@ -198,17 +198,22 @@ public class Print implements Printable
 	
 
 	
-	 private void Centre(String s, int width, int XPos, int YPos,Graphics g2d){  
+	 private void Centre(String s, int width, int XPos, int YPos,Graphics g2d)
+	 {  
 	        int stringLen = (int)  g2d.getFontMetrics().getStringBounds(s, g2d).getWidth();  
 	        int start = width/2 - stringLen/2;  
 	        g2d.drawString(s, start + XPos, YPos);  
 	 }
 	
 	 
-	 public void PrintIndexNumber(int topleftx,int toplefty, Graphics gr)
-	 {	   gr.drawString("College Index Number",topleftx+70,toplefty);
-	       
-		 
+	 public void PrintIndexNumber(int tlx,int tly, Graphics gr)
+	 {	   gr.drawString("College Index Number",tlx,tly);
+	       int width=10;
+	       int strlen=Index.length(); if(strlen==0) return;
+	       for(int i=0;i<strlen;i++)
+	       {PrintBoxedString(Index.substring(i, i+1),tlx+100,tly-10,width,linespacing,gr);
+	        tlx+=width;
+	       }
 	 }
 	 
 	 public void PrintHeader(int topleftx,int toplefty,Graphics gr,int pageno)
@@ -311,12 +316,11 @@ public class Print implements Printable
 	   
 	   gr.drawString("Name & Signature",topleftx,toplefty); 
 	   gr.drawString("Name & Signature",topleftx+150,toplefty);
-	   gr.drawString("With Rubber Stamp",topleftx+320,toplefty);
-	   toplefty+=linespacing;
-	   toplefty+=linespacing;
+	   gr.drawString("With Rubber Stamp",topleftx+330,toplefty);
+	   toplefty+=linespacing+10;
 	   gr.drawString("Note :",topleftx,toplefty);
 	   toplefty+=linespacing;
-	   toplefty+=linespacing;
+	   
 	   gr.drawString("1. Submit to Board with Practical Marksheet.   2. Write ABSENT with Red Ink   3. Write Extra No.s if any.",
 			   topleftx,toplefty);
 	
