@@ -16,7 +16,7 @@ public class Controller {
     private ActionListener actionListener;
     private MouseAdapter mouseAdapter;
     private boolean f=true;
-    private Print pr=new Print();
+    private PrintOral pr=new PrintOral();
     
     public Controller(Model model, View view)
     {
