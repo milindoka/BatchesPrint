@@ -30,7 +30,8 @@ public class PrintOral implements Printable
 	 int linespacing = 12;
     ////--------------------------------------------------------------------
 	
-	 int colwidth[]={40,90,90,220};
+	 int colwidth[]={40,90,220,100};
+	
 	String filebeingprinted;
 	int totalpages=0;
 	int TotalBatches=0;
@@ -39,7 +40,7 @@ public class PrintOral implements Printable
     private String BoardName2="Mumbai Divisional Board, Vashi, Navi Mumbai - 400703";
     private String MonthYear="Feb/March-2018";
 
-    private String School,Index,Stream,Standard,Subject,SubjectCode,Type,BatchNo,BatchCreator,
+    private String School,Index,Stream,Standard,Subject,SubjectCode,Medium="English",Type,BatchNo,BatchCreator,
                    Email1,Email2,Det,Tyme,Session;
 
 	
@@ -132,8 +133,8 @@ public class PrintOral implements Printable
 		 Font MyFont = new Font("Gargi", Font.PLAIN,9);
 		 pg.setFont(MyFont); 
          
-		 // PrintIndexNumber(TOPLEFTX+120,TOPLEFTY,pg);
-		 Centre("ORAL EXAM/तोंडी परीक्षा",460,TOPLEFTX,TOPLEFTY,pg);
+		  PrintIndexNumber(TOPLEFTX+120,TOPLEFTY,pg);
+		 
 		  PrintHeader(TOPLEFTX,TOPLEFTY+20,pg,pageno);
 		  PrintGridTitle(TOPLEFTX,TOPLEFTY+118,pg);
 		  PrintGridMain(TOPLEFTX,TOPLEFTY+118+linespacing,pg);
@@ -230,19 +231,26 @@ public class PrintOral implements Printable
 	   toplefty+=linespacing;
 	   Centre(Standard+" - "+Type+" - "+MonthYear,460,topleftx,toplefty,gr);
 	   toplefty+=linespacing;
-	   Centre("Attendance Sheet",460,topleftx,toplefty,gr);
+	   //Centre("Attendance Sheet",460,topleftx,toplefty,gr);
+	   Centre("ORAL EXAM/तोंडी परीक्षा",460,topleftx,toplefty,gr);
 	   toplefty+=linespacing;
-	   gr.drawString("School/College/Centre : "+School,topleftx,toplefty);
-	  gr.drawString("Batch No :  "+BatchNo,topleftx+340,toplefty);
+	   Centre("FORM No. 3A",460,topleftx,toplefty,gr);
+	   toplefty+=linespacing;
+	   gr.drawString("Jr College/School Name : "+School,topleftx,toplefty);
+	   gr.drawString("Block No :  "+BatchNo,topleftx+380,toplefty);
 	  toplefty+=linespacing;
 	  gr.drawString("Subject : "+Subject,topleftx,toplefty);
-	  gr.drawString("Date :  "+Det,topleftx+340,toplefty);
+	  gr.drawString("Subject No : "+SubjectCode,topleftx+240,toplefty);
+	  gr.drawString("Medium : "+Medium,topleftx+380,toplefty);
+	  
+	  
+	 
 	  toplefty+=linespacing;
 	  gr.drawString("Seat No.s : From  "+StartSeatNo+"  TO  "+EndSeatNo,topleftx,toplefty);
-	  
-	  gr.drawString("Time :  "+Tyme,topleftx+340,toplefty);
-	  toplefty+=linespacing;
-	  gr.drawString("Extra Seat No.s :",topleftx,toplefty);
+	  gr.drawString("Date :  "+Det,topleftx+240,toplefty);
+	  gr.drawString("Time :  "+Tyme,topleftx+380,toplefty);
+	//  toplefty+=linespacing;
+	//  gr.drawString("Extra Seat No.s :",topleftx,toplefty);
 	  }
 	 
 	 
@@ -266,7 +274,7 @@ public class PrintOral implements Printable
 		 tlx+=colwidth[0];
 		 PrintBoxedString("Seat No",tlx,tly,colwidth[1],linespacing,pg);
 		 tlx+=colwidth[1];
-		 PrintBoxedString("Session",tlx,tly,colwidth[2],linespacing,pg);
+		 PrintBoxedString("Name of the Candidate",tlx,tly,colwidth[2],linespacing,pg);
 		 tlx+=colwidth[2];
 		 PrintBoxedString("Students's Signature",tlx,tly,colwidth[3],linespacing,pg);
 	 }
@@ -297,7 +305,7 @@ public class PrintOral implements Printable
              leftx+=colwidth[0];	       
 		     PrintBoxedString(rollArray.get(i),leftx,tly,colwidth[1],linespacing,pg);
 		     leftx+=colwidth[1];
-		     PrintBoxedString(Session,leftx,tly,colwidth[2],linespacing,pg);
+		     PrintBoxedString("",leftx,tly,colwidth[2],linespacing,pg);
 		     leftx+=colwidth[2];
 		      PrintBoxedString("",leftx,tly,colwidth[3],linespacing,pg);
 		      tly+=linespacing;
@@ -310,21 +318,17 @@ public class PrintOral implements Printable
 	 public void PrintFooter(int topleftx,int toplefty,Graphics gr)
 	  {
 	     linespacing=12;
-	   gr.drawString("Internal Examiner",topleftx,toplefty);
-	   gr.drawString("External Examiner",topleftx+150,toplefty);
-	   gr.drawString("Signature of Head of the Jr. College",topleftx+300,toplefty);
-	   toplefty+=linespacing;
-	   
-	   gr.drawString("Name & Signature",topleftx,toplefty); 
-	   gr.drawString("Name & Signature",topleftx+150,toplefty);
-	   gr.drawString("With Rubber Stamp",topleftx+330,toplefty);
-	   toplefty+=linespacing+10;
-	   gr.drawString("Note :",topleftx,toplefty);
-	   toplefty+=linespacing;
-	   
-	   gr.drawString("1. Submit to Board with Practical Marksheet.   2. Write ABSENT with Red Ink   3. Write Extra No.s if any.",
-			   topleftx,toplefty);
+	   gr.drawString("Supervisor's/Teacher's Name :",topleftx,toplefty);
+	   gr.drawString("Conductor's/Princpal's/Head Master's Signature : ",topleftx+250,toplefty);
 	
+	   toplefty+=linespacing;
+	   
+	   gr.drawString("Signature :",topleftx,toplefty); 
+	   gr.drawString("And Stamp :",topleftx+250,toplefty);
+	  
+	   toplefty+=linespacing+10;
+	   gr.drawString("Note : To be kept by Centre/School College conductor for one year after the declaration of the result",topleftx,toplefty);
+	   
 	  
 	  }
 	 
