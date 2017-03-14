@@ -1,6 +1,10 @@
 package in.refort.batches;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Model {
@@ -12,7 +16,7 @@ public class Model {
     
 	public  ArrayList<String> pathArray = new ArrayList<String>(); //array containing full paths
 	public  ArrayList<String> nameArray = new ArrayList<String>(); //array containing file name
-
+	public  ArrayList<String> strArray = new ArrayList<String>(); //array containing file name
     
     
     public Model()
@@ -29,6 +33,11 @@ public class Model {
     public ArrayList<String> getNameArray()
     {
         return nameArray;
+    }
+    
+    public ArrayList<String> getBatchArray()
+    {
+        return strArray;
     }
     
 
@@ -50,4 +59,37 @@ public class Model {
         path=dir.toString();
      	return  path;
     }
+    
+    
+    public  void ReadFromDisk(String fnem)
+    {   strArray.removeAll(strArray);
+    	BufferedReader reader=null;
+		try {
+			reader = new BufferedReader(new FileReader(fnem));
+		} catch (FileNotFoundException e1) 
+		{
+		
+			e1.printStackTrace();
+		}
+ 				
+		String line = null;
+    	try { while ((line = reader.readLine()) != null) 
+			{
+			 
+			 strArray.add(line);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+     }
+    
+    public String getPrintType()
+    {
+    	return strArray.get(7);
+    }
+    
+    
+    
 }

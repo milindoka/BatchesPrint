@@ -17,6 +17,7 @@ public class Controller {
     private MouseAdapter mouseAdapter;
     private boolean f=true;
     private PrintOral pr=new PrintOral();
+    private PrintPractical pp=new PrintPractical();
     
     public Controller(Model model, View view)
     {
@@ -86,9 +87,13 @@ public class Controller {
     private void TablePrintButtonClicked()
     {
         Boolean temp;
+        
       
     	for (int i = 0; i < view.getTable().getRowCount(); i++)
     	{	temp=(Boolean) GetData(i,1);
+    	    model.ReadFromDisk(model.pathArray.get(i)); /// read the batch file from disk
+    	    String print_type=model.getPrintType();
+    	    
               if(temp)
             	  
             	  pr.PrintBatch(model.pathArray.get(i),model.getPrinterName(),model.nameArray.get(i));
