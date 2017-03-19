@@ -48,29 +48,12 @@ public class PrintOral implements Printable
 		{JOptionPane.showMessageDialog(null, msg);}
 	    
 	
-	public  void ReadFromDisk(String fnem)
-    {   strArray.removeAll(strArray);
-    	BufferedReader reader=null;
-		try {
-			reader = new BufferedReader(new FileReader(fnem));
-		} catch (FileNotFoundException e1) 
-		{
-		
-			e1.printStackTrace();
+
+	  public void setArray(ArrayList<String> array) 
+	   {
+		  strArray=array;
 		}
- 				
-		String line = null;
-    	try { while ((line = reader.readLine()) != null) 
-			{
-			 
-			 strArray.add(line);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-     }
+	  
 	
 	
 	
@@ -80,7 +63,7 @@ public class PrintOral implements Printable
 	  public void PrintBatch(String filepath,String printername,String filename)
               {
 		  
-		  ReadFromDisk(filepath);  ////Read all text lines  in strArray
+
 		  SetAllHeaderFields();    //// School, Index,Subject,Batch etc
 		  
 		  filebeingprinted=filename;
