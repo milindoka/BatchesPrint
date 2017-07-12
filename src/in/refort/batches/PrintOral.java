@@ -40,7 +40,7 @@ public class PrintOral implements Printable
     private String BoardName2="Mumbai Divisional Board, Vashi, Navi Mumbai - 400703";
     private String MonthYear="Feb/March-2018";
 
-    private String School,Index,Stream,Standard,Subject,SubjectCode,Medium="English",Type,BatchNo,BatchCreator,
+    private String School,Index,Stream,Standard,Subject,SubjectCode,Medium,Type,BatchNo,BatchCreator,
                    Email1,Email2,Det,Tyme,Session;
 
 	
@@ -148,17 +148,16 @@ public class PrintOral implements Printable
         return null;
     }
 	
-	
 	public void SetAllHeaderFields()
 	{   
 		
-		String temp,stemp[];
-		for(int i=1;i<15;i++)
-		{stemp=strArray.get(i).split(":");
-		temp=stemp[1].trim();
+		String temp,stemp;
+		for(int i=1;i<16;i++)
+		{stemp=strArray.get(i).substring(15);
+		//show
+		temp=stemp.trim();
 		strArray.set(i,temp);	
 		}
-		
 		
 		// line 0 is blank line
 		School=strArray.get(1); 
@@ -167,17 +166,18 @@ public class PrintOral implements Printable
 		Standard=strArray.get(4);
 		Subject=strArray.get(5);
 		SubjectCode=strArray.get(6);
-		Type=strArray.get(7);
-		BatchNo=strArray.get(8);
-		BatchCreator=strArray.get(9);
-		Email1=strArray.get(10); 
-		Email2=strArray.get(11); 
-		Det=strArray.get(12);
-		Tyme=strArray.get(13);
-		Session=strArray.get(14);
+		Medium=strArray.get(7);
+		Type=strArray.get(8);
+		BatchNo=strArray.get(9);
+		BatchCreator=strArray.get(10);
+		Email1=strArray.get(11); 
+		Email2=strArray.get(12); 
+		Det=strArray.get(13);
+		Tyme=strArray.get(14);
+		Session=strArray.get(15);
 		
 		rollArray.removeAll(rollArray);
-		for(int i=20;i<strArray.size();i++) rollArray.add(strArray.get(i));
+		for(int i=21;i<strArray.size();i++) rollArray.add(strArray.get(i));
 		
 	}
 	

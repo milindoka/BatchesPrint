@@ -95,13 +95,13 @@ public class Controller {
     	    String print_type=model.getPrintType();
     	    System.out.print(print_type);
     	    print_type=print_type.toUpperCase();
-    	    if(print_type.contains("ORAL")) 
+    	    if(print_type.contains("PRACTICAL")) 
     	    	{ System.out.print("oral");
     	    	   po.setArray(model.strArray);
     	    	   po.PrintBatch(model.pathArray.get(i),model.getPrinterName(),model.nameArray.get(i));
     	    	}
     	    
-    	    if(print_type.contains("PRACTICAL"))
+    	    if(print_type.contains("PRACTIL"))
     	    	{ System.out.print("practical");
     	         pp.setArray(model.strArray);
     	    	 pp.PrintBatch(model.pathArray.get(i),model.getPrinterName(),model.nameArray.get(i));  

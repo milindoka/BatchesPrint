@@ -87,7 +87,7 @@ public class Model {
     
     public String getPrintType()
     {
-    	return strArray.get(7);
+    	return strArray.get(8);
     }
     
     
