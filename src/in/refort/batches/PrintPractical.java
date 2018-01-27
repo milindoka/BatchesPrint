@@ -37,7 +37,7 @@ public class PrintPractical implements Printable
 	int CurrentBatch=0;
 	private String BoardName1="Maharashtra State Board of Secondary & Higher Secondary Education,";
     private String BoardName2="Mumbai Divisional Board, Vashi, Navi Mumbai - 400703";
-    private String MonthYear="July-2017";
+    private String MonthYear="Feb-2018";
 
     private String School,Index,Stream,Standard,Subject,SubjectCode,medium,Type,BatchNo,BatchCreator,
                    Email1,Email2,Det,Tyme,Session;

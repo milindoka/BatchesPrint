@@ -38,7 +38,7 @@ public class PrintOral implements Printable
 	int CurrentBatch=0;
 	private String BoardName1="Maharashtra State Board of Secondary & Higher Secondary Education,";
     private String BoardName2="Mumbai Divisional Board, Vashi, Navi Mumbai - 400703";
-    private String MonthYear="Feb/March-2018";
+    private String MonthYear="Feb-2018";
 
     private String School,Index,Stream,Standard,Subject,SubjectCode,Medium,Type,BatchNo,BatchCreator,
                    Email1,Email2,Det,Tyme,Session;
@@ -215,7 +215,7 @@ public class PrintOral implements Printable
 	   Centre(Standard+" - "+Type+" - "+MonthYear,460,topleftx,toplefty,gr);
 	   toplefty+=linespacing;
 	   //Centre("Attendance Sheet",460,topleftx,toplefty,gr);
-	   Centre("ORAL EXAM/तोंडी परीक्षा",460,topleftx,toplefty,gr);
+	   Centre("ORAL EXAM/��������������� ���������������������",460,topleftx,toplefty,gr);
 	   toplefty+=linespacing;
 	   Centre("FORM No. 3A",460,topleftx,toplefty,gr);
 	   toplefty+=linespacing;
