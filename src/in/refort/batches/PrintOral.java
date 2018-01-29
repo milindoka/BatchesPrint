@@ -113,7 +113,7 @@ public class PrintOral implements Printable
 	        }
 		 
 		 
-		 Font MyFont = new Font("Gargi", Font.PLAIN,9);
+		 Font MyFont = new Font("Liberation Serif", Font.PLAIN,9);
 		 pg.setFont(MyFont); 
          
 		  PrintIndexNumber(TOPLEFTX+120,TOPLEFTY,pg);
@@ -215,7 +215,7 @@ public class PrintOral implements Printable
 	   Centre(Standard+" - "+Type+" - "+MonthYear,460,topleftx,toplefty,gr);
 	   toplefty+=linespacing;
 	   //Centre("Attendance Sheet",460,topleftx,toplefty,gr);
-	   Centre("ORAL EXAM/��������������� ���������������������",460,topleftx,toplefty,gr);
+	   Centre("ORAL EXAM/PROJECT",460,topleftx,toplefty,gr);
 	   toplefty+=linespacing;
 	   Centre("FORM No. 3A",460,topleftx,toplefty,gr);
 	   toplefty+=linespacing;

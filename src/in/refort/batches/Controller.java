@@ -95,7 +95,7 @@ public class Controller {
     	    String print_type=model.getPrintType();
     	    System.out.print(print_type);
     	    print_type=print_type.toUpperCase();
-    	    if(print_type.contains("ORAL")) 
+    	    if(print_type.contains("ORAL") || print_type.contains("PROJ")) 
     	    	{ System.out.print("oral");
     	    	   po.setArray(model.strArray);
     	    	   po.PrintBatch(model.pathArray.get(i),model.getPrinterName(),model.nameArray.get(i));
