@@ -206,6 +206,11 @@ public class PrintPractical implements Printable
 	 public void PrintHeader(int topleftx,int toplefty,Graphics gr,int pageno)
 	  {linespacing=12;
 	     
+	  
+	  PrintBoxedString( "C-2",450,toplefty-30,20,12,gr);
+	  PrintBoxedString( "BR. P.2",470,toplefty-30,35,12,gr);
+	  PrintBoxedString( "21",505,toplefty-30,13,12,gr);
+	  
 	  String StartSeatNo=rollArray.get(0);
 	  String EndSeatNo=rollArray.get(rollArray.size()-1);
 	   

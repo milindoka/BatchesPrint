@@ -204,6 +204,9 @@ public class PrintOral implements Printable
 	 public void PrintHeader(int topleftx,int toplefty,Graphics gr,int pageno)
 	  {linespacing=12;
 	     
+	  PrintBoxedString( "SSC/HSC",470,toplefty-30,55,10,gr);
+	  PrintBoxedString( "Form No. 3A",470,toplefty-20,55,10,gr);
+	  
 	  String StartSeatNo=rollArray.get(0);
 	  String EndSeatNo=rollArray.get(rollArray.size()-1);
 	   
