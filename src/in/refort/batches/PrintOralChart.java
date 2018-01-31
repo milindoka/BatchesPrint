@@ -15,7 +15,7 @@ import javax.print.attribute.standard.MediaPrintableArea;
 import javax.swing.JOptionPane;
 
 
-public class PrintOral implements Printable
+public class PrintOralChart implements Printable
 {	
 	
 	public  ArrayList<String> strArray = new ArrayList<String>();
@@ -26,7 +26,7 @@ public class PrintOral implements Printable
 	 int linespacing = 12;
     ////--------------------------------------------------------------------
 	
-	 int colwidth[]={40,90,220,100};
+	 int colwidth[]={25,52,52,50,50,50,50,50,60};
 	
 	String filebeingprinted;
 	int totalpages=0;
@@ -256,9 +256,20 @@ public class PrintOral implements Printable
 		 tlx+=colwidth[0];
 		 PrintBoxedString("Seat No",tlx,tly,colwidth[1],linespacing,pg);
 		 tlx+=colwidth[1];
-		 PrintBoxedString("Name of the Candidate",tlx,tly,colwidth[2],linespacing,pg);
+		 PrintBoxedString("Roll",tlx,tly,colwidth[2],linespacing,pg);
 		 tlx+=colwidth[2];
-		 PrintBoxedString("Students's Signature",tlx,tly,colwidth[3],linespacing,pg);
+		 PrintBoxedString("LM",tlx,tly,colwidth[3],linespacing,pg);
+		 tlx+=colwidth[3];
+		 PrintBoxedString("RM",tlx,tly,colwidth[4],linespacing,pg);
+		 tlx+=colwidth[4];
+		 PrintBoxedString("SM",tlx,tly,colwidth[5],linespacing,pg);
+		 tlx+=colwidth[5];
+		 PrintBoxedString("CM",tlx,tly,colwidth[6],linespacing,pg);
+		 tlx+=colwidth[6];
+		 PrintBoxedString("TOT",tlx,tly,colwidth[7],linespacing,pg);
+		 tlx+=colwidth[7];
+		 PrintBoxedString("Words",tlx,tly,colwidth[8],linespacing,pg);
+		 
 	 }
 	 
 	 void PrintGridMain(int tlx,int tly,Graphics pg)
@@ -268,14 +279,27 @@ public class PrintOral implements Printable
 	       { if(i>=rollArray.size())  ///print empty grid
 	       {leftx=tlx;
 			 
-		     PrintBoxedString(" ",leftx,tly,colwidth[0],linespacing,pg);
+		     PrintBoxedString("",leftx,tly,colwidth[0],linespacing,pg);
              leftx+=colwidth[0];	       
-		     PrintBoxedString(" ",leftx,tly,colwidth[1],linespacing,pg);
+		     PrintBoxedString("",leftx,tly,colwidth[1],linespacing,pg);
 		     leftx+=colwidth[1];
-		     PrintBoxedString(" ",leftx,tly,colwidth[2],linespacing,pg);
+		     PrintBoxedString("",leftx,tly,colwidth[2],linespacing,pg);
 		     leftx+=colwidth[2];
-		      PrintBoxedString("",leftx,tly,colwidth[3],linespacing,pg);
+		     PrintBoxedString("",leftx,tly,colwidth[3],linespacing,pg);
+		     leftx+=colwidth[3];
+		     PrintBoxedString("",leftx,tly,colwidth[4],linespacing,pg);
+		     leftx+=colwidth[4];
+		     PrintBoxedString("",leftx,tly,colwidth[5],linespacing,pg);
+		     leftx+=colwidth[5];
+		     PrintBoxedString("",leftx,tly,colwidth[6],linespacing,pg);
+		     leftx+=colwidth[6];
+		     PrintBoxedString("",leftx,tly,colwidth[7],linespacing,pg);
+		     leftx+=colwidth[7];
+		     PrintBoxedString("",leftx,tly,colwidth[8],linespacing,pg);
+		      
+		      
 		      tly+=linespacing;
+		      
 	    	   
 	       }
 	    	   
@@ -289,8 +313,21 @@ public class PrintOral implements Printable
 		     leftx+=colwidth[1];
 		     PrintBoxedString("",leftx,tly,colwidth[2],linespacing,pg);
 		     leftx+=colwidth[2];
-		      PrintBoxedString("",leftx,tly,colwidth[3],linespacing,pg);
-		      tly+=linespacing;
+		     PrintBoxedString("",leftx,tly,colwidth[3],linespacing,pg);
+		     leftx+=colwidth[3];
+		     PrintBoxedString("",leftx,tly,colwidth[4],linespacing,pg);
+		     leftx+=colwidth[4];
+		     PrintBoxedString("",leftx,tly,colwidth[5],linespacing,pg);
+		     leftx+=colwidth[5];
+		     PrintBoxedString("",leftx,tly,colwidth[6],linespacing,pg);
+		     leftx+=colwidth[6];
+		     PrintBoxedString("",leftx,tly,colwidth[7],linespacing,pg);
+		     leftx+=colwidth[7];
+		     PrintBoxedString("",leftx,tly,colwidth[8],linespacing,pg);
+		     
+		     
+		     
+		     tly+=linespacing;
 	       }
 	    }
 	 }

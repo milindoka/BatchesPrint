@@ -18,6 +18,8 @@ public class View {
    
     private JLabel prname;
     private JButton setPrinterButton;
+    private JButton chechartButton;
+    private JButton engchartButton;
     private TableModel tm = new MyTableModel();
     final JTable table = new JTable(tm);
 
@@ -47,10 +49,19 @@ public class View {
         prname = new JLabel("");
         
         setPrinterButton = new JButton("Set Printer");        
+        
+        engchartButton = new JButton("Eng Chart");
+        chechartButton = new JButton("Che chart");
+        
+        
         JPanel TopPanel = new JPanel();
-        TopPanel.setLayout(new GridLayout(1,2));
+        
+        
+        TopPanel.setLayout(new GridLayout(2,2));
     	TopPanel.add(setPrinterButton);
     	TopPanel.add(prname);
+    	TopPanel.add(engchartButton);
+    	TopPanel.add(chechartButton);
     	
     	
     	frame = new JFrame("View");                                    
@@ -63,7 +74,7 @@ public class View {
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-    	frame.setSize(400,300);
+    	frame.setSize(400,500);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setTitle("BathesPrint 1.0") ;   	

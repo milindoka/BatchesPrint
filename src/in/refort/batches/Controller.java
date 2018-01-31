@@ -18,12 +18,12 @@ public class Controller {
     private boolean f=true;
     private PrintOral po=new PrintOral();
     private PrintPractical pp=new PrintPractical();
+    private PrintOralChart oc=new PrintOralChart();
     
     public Controller(Model model, View view)
     {
         this.model = model;
         this.view = view;
-                          
     }
     
     public void contol()
@@ -96,9 +96,17 @@ public class Controller {
     	    System.out.print(print_type);
     	    print_type=print_type.toUpperCase();
     	    if(print_type.contains("ORAL") || print_type.contains("PROJ")) 
-    	    	{ System.out.print("oral");
+    	    	{ 
+    	    	
+    	       System.out.print("oralchart");
+ 	    	   oc.setArray(model.strArray);
+ 	    	   oc.PrintBatch(model.pathArray.get(i),model.getPrinterName(),model.nameArray.get(i));
+    	    	
+    	    	/*
+    	    	  System.out.print("oral");
     	    	   po.setArray(model.strArray);
     	    	   po.PrintBatch(model.pathArray.get(i),model.getPrinterName(),model.nameArray.get(i));
+    	    	   */
     	    	}
     	    
     	    if(print_type.contains("PRACT"))
