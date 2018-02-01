@@ -13,13 +13,14 @@ public class Controller {
 
     private Model model;
     private View view;
-    private ActionListener actionListener;
+    private ActionListener printAttendanceAL,printengChartAL,printcheChartAL;
     private MouseAdapter mouseAdapter;
     private boolean f=true;
     private PrintOral po=new PrintOral();
     private PrintPractical pp=new PrintPractical();
     private PrintOralChart oc=new PrintOralChart();
-    
+    private PrintChemChart cc=new PrintChemChart();
+  
     public Controller(Model model, View view)
     {
         this.model = model;
@@ -28,15 +29,33 @@ public class Controller {
     
     public void contol()
     {        
-        actionListener = new ActionListener()
+        printAttendanceAL = new ActionListener()
         {
               public void actionPerformed(ActionEvent actionEvent)
               {                  
             	  setPrinterButtonClicked();
               }
         };                
-        view.getPrinterButton().addActionListener(actionListener);   
+        view.getPrinterButton().addActionListener(printAttendanceAL);   
     
+        
+        printengChartAL = new ActionListener()
+        {
+              public void actionPerformed(ActionEvent actionEvent)
+              {                  
+            	  engchartButtonClicked();
+              }
+        };                
+        view.getengchartButton().addActionListener(printengChartAL); 
+        
+        printcheChartAL = new ActionListener()
+        {
+              public void actionPerformed(ActionEvent actionEvent)
+              {                  
+            	  chechartButtonClicked();
+              }
+        };                
+        view.getchechartButton().addActionListener(printcheChartAL); 
         
     
        
@@ -76,6 +95,45 @@ public class Controller {
         /////End of Initial Update
     }
     
+    private void engchartButtonClicked()
+    {
+        Boolean printthis;
+        
+    	for (int i = 0; i < view.getTable().getRowCount(); i++)
+    	{	printthis=(Boolean) GetData(i,1);
+    	    if(!printthis) continue;
+    	    model.ReadFromDisk(model.pathArray.get(i)); /// read the batch file from disk
+    	    String print_type=model.getPrintType();
+    	    System.out.print(print_type);
+    	    print_type=print_type.toUpperCase();
+    	    	
+    	       System.out.print("oralchart");
+ 	    	   oc.setArray(model.strArray);
+ 	    	   oc.PrintBatch(model.pathArray.get(i),model.getPrinterName(),model.nameArray.get(i));
+    	}
+    	
+    }
+    
+    
+    private void chechartButtonClicked()
+    {Boolean printthis;
+    
+	for (int i = 0; i < view.getTable().getRowCount(); i++)
+	{	printthis=(Boolean) GetData(i,1);
+	    if(!printthis) continue;
+	    model.ReadFromDisk(model.pathArray.get(i)); /// read the batch file from disk
+	    String print_type=model.getPrintType();
+	    System.out.print(print_type);
+	    print_type=print_type.toUpperCase();
+	    	
+	       System.out.print("che chart");
+	    	   cc.setArray(model.strArray);
+	    	   cc.PrintBatch(model.pathArray.get(i),model.getPrinterName(),model.nameArray.get(i));
+	}
+    	
+    }
+    
+    
     private void setPrinterButtonClicked()
     {
     	SetPrinter sp=new SetPrinter();
@@ -97,16 +155,10 @@ public class Controller {
     	    print_type=print_type.toUpperCase();
     	    if(print_type.contains("ORAL") || print_type.contains("PROJ")) 
     	    	{ 
-    	    	
-    	       System.out.print("oralchart");
- 	    	   oc.setArray(model.strArray);
- 	    	   oc.PrintBatch(model.pathArray.get(i),model.getPrinterName(),model.nameArray.get(i));
-    	    	
-    	    	/*
     	    	  System.out.print("oral");
     	    	   po.setArray(model.strArray);
     	    	   po.PrintBatch(model.pathArray.get(i),model.getPrinterName(),model.nameArray.get(i));
-    	    	   */
+    	    	  
     	    	}
     	    
     	    if(print_type.contains("PRACT"))

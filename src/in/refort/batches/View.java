@@ -96,6 +96,16 @@ public class View {
         prname.setText("   "+text);
     }
     
+
+    public JButton getengchartButton(){
+        return engchartButton;
+    }
+
+    public JButton getchechartButton(){
+        return chechartButton;
+    }
+
+    
 }
 
 
