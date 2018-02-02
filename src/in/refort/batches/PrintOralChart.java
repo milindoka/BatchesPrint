@@ -68,7 +68,7 @@ public class PrintOralChart implements Printable
 		  if(ps==null) return;
 		   
 	         PrinterJob job = PrinterJob.getPrinterJob();
-	         job.setJobName(filename);
+	         job.setJobName(filename+"-CHART");
 	         try {
 				job.setPrintService(ps);
 			} catch (PrinterException e) {
