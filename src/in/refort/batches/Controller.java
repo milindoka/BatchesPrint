@@ -20,11 +20,13 @@ public class Controller {
     private PrintPractical pp=new PrintPractical();
     private PrintOralChart oc=new PrintOralChart();
     private PrintChemChart cc=new PrintChemChart();
+    private PrintTheoryAttendance ta=new PrintTheoryAttendance();
   
     public Controller(Model model, View view)
     {
         this.model = model;
         this.view = view;
+        ta.setModelView(model,view);
     }
     
     public void contol()
@@ -150,18 +152,22 @@ public class Controller {
     private void TheoryAttendanceButtonClicked()
     {   
 
-        Boolean printthis; ///tick mark true false
+    ta.PreparePrinting();
+    ta.StartPrinting(model.getPrinterName());
+    
+    /*    
         
     	for (int i = 0; i < view.getTable().getRowCount(); i++)
     	{	printthis=(Boolean) GetData(i,1);
     	    if(!printthis) continue;
     	    model.ReadFromDisk(model.pathArray.get(i)); /// read the batch file from disk
     	    System.out.print("Theory");
-    	    po.setArray(model.strArray);
-    	    po.PrintBatch(model.pathArray.get(i),model.getPrinterName(),model.nameArray.get(i));
+    	    ta.setArray(model.strArray);
+    	    ta.PrintBatch(model.pathArray.get(i),model.getPrinterName(),model.nameArray.get(i));
     	     	
     	}
     	
+    	*/
     }
     
     
@@ -231,7 +237,7 @@ public class Controller {
   	         } 
   	      }
   	        
-  	   SortArrays();
+  	  SortArrays();
   	  model.TotalBatches=model.pathArray.size();
   	  //show(TotalMarklists);
        for(int i=0;i<model.TotalBatches;i++)
