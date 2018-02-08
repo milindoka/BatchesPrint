@@ -20,6 +20,8 @@ public class View {
     private JButton setPrinterButton;
     private JButton chechartButton;
     private JButton engchartButton;
+    private JButton theoryButton;
+    private JButton helpButton;
     private TableModel tm = new MyTableModel();
     final JTable table = new JTable(tm);
 
@@ -47,22 +49,25 @@ public class View {
         
         
         prname = new JLabel("");
-        
         setPrinterButton = new JButton("Set Printer");        
         
         engchartButton = new JButton("Eng Chart");
         chechartButton = new JButton("Che chart");
         
+        theoryButton = new JButton("Theory Attendance");
+        helpButton = new JButton("Help");
+
         
         JPanel TopPanel = new JPanel();
         
         
-        TopPanel.setLayout(new GridLayout(2,2));
+        TopPanel.setLayout(new GridLayout(3,2));
     	TopPanel.add(setPrinterButton);
     	TopPanel.add(prname);
     	TopPanel.add(engchartButton);
     	TopPanel.add(chechartButton);
-    	
+    	TopPanel.add(theoryButton);
+    	TopPanel.add(helpButton);
     	
     	frame = new JFrame("View");                                    
         
@@ -104,6 +109,16 @@ public class View {
     public JButton getchechartButton(){
         return chechartButton;
     }
+    
+    public JButton gettheoryButton(){
+        return theoryButton;
+    }
+    
+    public JButton gethelpButton(){
+        return helpButton;
+    }
+    
+    
 
     
 }

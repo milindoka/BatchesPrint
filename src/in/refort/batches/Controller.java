@@ -13,7 +13,7 @@ public class Controller {
 
     private Model model;
     private View view;
-    private ActionListener printAttendanceAL,printengChartAL,printcheChartAL;
+    private ActionListener setprinterAL,printengChartAL,printcheChartAL,printTheoryAL;
     private MouseAdapter mouseAdapter;
     private boolean f=true;
     private PrintOral po=new PrintOral();
@@ -29,14 +29,14 @@ public class Controller {
     
     public void contol()
     {        
-        printAttendanceAL = new ActionListener()
+        setprinterAL = new ActionListener()
         {
               public void actionPerformed(ActionEvent actionEvent)
               {                  
             	  setPrinterButtonClicked();
               }
         };                
-        view.getPrinterButton().addActionListener(printAttendanceAL);   
+        view.getPrinterButton().addActionListener(setprinterAL);   
     
         
         printengChartAL = new ActionListener()
@@ -130,6 +130,17 @@ public class Controller {
 	    	   cc.setArray(model.strArray);
 	    	   cc.PrintBatch(model.pathArray.get(i),model.getPrinterName(),model.nameArray.get(i));
 	}
+    	
+    }
+    
+    
+    private void TheoryAttendanceButtonClicked()
+    {
+    	
+    	
+    	
+    	
+    	
     	
     }
     
