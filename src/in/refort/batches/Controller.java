@@ -28,7 +28,20 @@ public class Controller {
     }
     
     public void contol()
-    {        
+    {   
+    	
+    	printTheoryAL = new ActionListener()
+        {
+              public void actionPerformed(ActionEvent actionEvent)
+              {                  
+            	  TheoryAttendanceButtonClicked();
+              }
+        };                
+        view.gettheoryButton().addActionListener(printTheoryAL);   
+    
+    	
+    	
+    	
         setprinterAL = new ActionListener()
         {
               public void actionPerformed(ActionEvent actionEvent)
@@ -135,12 +148,19 @@ public class Controller {
     
     
     private void TheoryAttendanceButtonClicked()
-    {
-    	
-    	
-    	
-    	
-    	
+    {   
+
+        Boolean printthis; ///tick mark true false
+        
+    	for (int i = 0; i < view.getTable().getRowCount(); i++)
+    	{	printthis=(Boolean) GetData(i,1);
+    	    if(!printthis) continue;
+    	    model.ReadFromDisk(model.pathArray.get(i)); /// read the batch file from disk
+    	    System.out.print("Theory");
+    	    po.setArray(model.strArray);
+    	    po.PrintBatch(model.pathArray.get(i),model.getPrinterName(),model.nameArray.get(i));
+    	     	
+    	}
     	
     }
     
@@ -155,7 +175,7 @@ public class Controller {
     
     private void TablePrintButtonClicked()
     {
-        Boolean printthis;
+        Boolean printthis; ///tick mark true false
         
     	for (int i = 0; i < view.getTable().getRowCount(); i++)
     	{	printthis=(Boolean) GetData(i,1);
