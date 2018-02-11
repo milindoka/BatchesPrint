@@ -22,6 +22,40 @@ import javax.swing.JOptionPane;
 public class PrintPractical implements Printable
 {	
 	
+	private Model model;
+	private View view;
+	
+	public Object GetData(int row_index, int col_index)
+   	{ return view.table.getModel().getValueAt(row_index, col_index); }
+    
+    void setModelView(Model model,View view){ this.model=model; this.view=view; }
+    
+    void PreparePrinting()
+	{
+		 Boolean printthis;
+         tickedArray.remove(tickedArray);
+        
+    	for (int i = 0; i < view.getTable().getRowCount(); i++)
+    	{	printthis=(Boolean) (Boolean) GetData(i,1);
+    	    if(!printthis) continue;
+    	    tickedArray.add(model.pathArray.get(i));
+    	    //model.ReadFromDisk(model.pathArray.get(i)); /// read the batch file from disk
+    	    //System.out.println(model.pathArray.get(i));
+    	    //setArray(model.strArray);
+    	 //   PrintBatch(model.pathArray.get(i),model.getPrinterName(),model.nameArray.get(i));
+    	     	
+    	}
+      
+    	totalpages=tickedArray.size();
+     System.out.println(totalpages);
+	}
+
+	
+	
+
+	public  ArrayList<String> tickedArray = new ArrayList<String>();
+
+	
 	public  ArrayList<String> strArray = new ArrayList<String>();
 	public  ArrayList<String> rollArray = new ArrayList<String>();
 	
@@ -53,6 +87,40 @@ public class PrintPractical implements Printable
 	   {
 		  strArray=array;
 		}
+	  
+	  public void StartPrinting(String printername)
+      {
+  
+ // filebeingprinted=filename;
+  PrintService ps = findPrintService(printername);
+  if(ps==null) ps = PrintServiceLookup.lookupDefaultPrintService(); 
+  if(ps==null) return;
+   
+     PrinterJob job = PrinterJob.getPrinterJob();
+     job.setJobName("AllPractical");
+     try {
+		job.setPrintService(ps);
+	} catch (PrinterException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+     job.setPrintable(this);
+    
+     ////Widening the print AREA.
+     //Java Keeps preset Margins of about 1 inch on all corners
+         //Top Left Corner is  (0,0), then width and height
+     HashPrintRequestAttributeSet pattribs=new HashPrintRequestAttributeSet();
+     pattribs.add(new MediaPrintableArea(0, 0, 210, 297, MediaPrintableArea.MM));
+     // 210 x 297  A4 size paper in Millimiters.
+     
+
+     boolean ok = true; ///job.printDialog();
+     if (ok) 
+         try {
+              job.print(pattribs);
+         } catch (PrinterException ex) {}
+     }
+	  
 	  
 	  
 	
@@ -109,14 +177,18 @@ public class PrintPractical implements Printable
 	{
 		
 		
-		 if (pageno>totalpages)             // We have only one page, and 'page no' is zero-based
+		 if (pageno>=totalpages)             // We have only one page, and 'page no' is zero-based
 		    {  return NO_SUCH_PAGE;  // After NO_SUCH_PAGE, printer will stop printing.
 	        }
 		 
-		 
-		 Font MyFont = new Font("Liberation Serif", Font.PLAIN,10);
-		 pg.setFont(MyFont); 
+		   model.ReadFromDisk(tickedArray.get(pageno)); /// read the batch file from disk
+		    setArray(model.strArray);
+	 	    
+		    SetAllHeaderFields();    //// School, Index,Subject,Batch etc
+		   Font MyFont = new Font("Liberation Serif", Font.PLAIN,10);
+		   pg.setFont(MyFont); 
          
+		   
 		  PrintIndexNumber(TOPLEFTX+120,TOPLEFTY,pg);
 		  PrintHeader(TOPLEFTX,TOPLEFTY+20,pg,pageno);
 		  PrintGridTitle(TOPLEFTX,TOPLEFTY+118,pg);
@@ -135,6 +207,8 @@ public class PrintPractical implements Printable
 	
 	
 /////Supporting Functions for Prining //////////////////
+	
+	
 	
 	
 	public PrintService findPrintService(String printerName)

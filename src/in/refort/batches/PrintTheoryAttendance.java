@@ -78,16 +78,11 @@ public class PrintTheoryAttendance implements Printable
 		}
 	  
 	
-	
-	
 	///// Here the whole  JAVA Printing Mechanism Starts 
 	/////  Note 'implements Printable above', It includes the Print Mechanism to our Program
 	/////
 	  public void StartPrinting(String printername)
               {
-		  
-
-		 
 		  
 		 // filebeingprinted=filename;
 		  PrintService ps = findPrintService(printername);
@@ -123,10 +118,6 @@ public class PrintTheoryAttendance implements Printable
 	public int print(Graphics pg, PageFormat pf, int pageno)
 			throws PrinterException
 	{
-		
-		
-		
-		
 		
 		 if (pageno>=totalpages)             // We have only one page, and 'page no' is zero-based
 		    {  return NO_SUCH_PAGE;  // After NO_SUCH_PAGE, printer will stop printing.

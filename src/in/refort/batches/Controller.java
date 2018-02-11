@@ -27,6 +27,7 @@ public class Controller {
         this.model = model;
         this.view = view;
         ta.setModelView(model,view);
+        pp.setModelView(model, view);
     }
     
     public void contol()
@@ -181,8 +182,12 @@ public class Controller {
     
     private void TablePrintButtonClicked()
     {
-        Boolean printthis; ///tick mark true false
-        
+    	
+    	  pp.PreparePrinting();
+    	  pp.StartPrinting(model.getPrinterName());
+    	    /*  	
+    	
+    	Boolean printthis; ///tick mark true false
     	for (int i = 0; i < view.getTable().getRowCount(); i++)
     	{	printthis=(Boolean) GetData(i,1);
     	    if(!printthis) continue;
@@ -206,6 +211,9 @@ public class Controller {
     	    	}
     	     	
     	}
+
+    	*/
+    	
     	
     }
     
