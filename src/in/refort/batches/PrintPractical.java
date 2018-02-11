@@ -65,7 +65,9 @@ public class PrintPractical implements Printable
     ////--------------------------------------------------------------------
 	
 	 int colwidth[]={40,90,90,220};
-	String filebeingprinted;
+	 int colwidthOP[]={40,90,220,100};
+	 
+	 String filebeingprinted;
 	int totalpages=0;
 	int TotalBatches=0;
 	int CurrentBatch=0;
@@ -121,56 +123,11 @@ public class PrintPractical implements Printable
          } catch (PrinterException ex) {}
      }
 	  
-	  
-	  
-	
-	
 	
 	///// Here the whole  JAVA Printing Mechanism Starts 
 	/////  Note 'implements Printable above', It includes the Print Mechanism to our Program
 	/////
-	  public void PrintBatch(String filepath,String printername,String filename)
-              {
-		  
-		//  ReadFromDisk(filepath);  ////Read all text lines  in strArray
-		  SetAllHeaderFields();    //// School, Index,Subject,Batch etc
-		  
-		  filebeingprinted=filename;
-		  PrintService ps = findPrintService(printername);
-		  if(ps==null) ps = PrintServiceLookup.lookupDefaultPrintService(); 
-		  if(ps==null) return;
-		   
-	         PrinterJob job = PrinterJob.getPrinterJob();
-	         job.setJobName(filename);
-	         try {
-				job.setPrintService(ps);
-			} catch (PrinterException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	         job.setPrintable(this);
-	        
-	         ////Widening the print AREA.
-	         //Java Keeps preset Margins of about 1 inch on all corners
-                 //Top Left Corner is  (0,0), then width and height
-	         HashPrintRequestAttributeSet pattribs=new HashPrintRequestAttributeSet();
-	         pattribs.add(new MediaPrintableArea(0, 0, 210, 297, MediaPrintableArea.MM));
-	         // 210 x 297  A4 size paper in Millimiters.
-	         
-	         
-	         
-	         
-	  
-	         boolean ok = true; ///job.printDialog();
-	         if (ok) 
-	             try {
-	                  job.print(pattribs);
-	             } catch (PrinterException ex) {}
-	             
-	          
-              
-	         }
-	  
+	   
 	  
 	public int print(Graphics pg, PageFormat pf, int pageno)
 			throws PrinterException
@@ -188,14 +145,28 @@ public class PrintPractical implements Printable
 		   Font MyFont = new Font("Liberation Serif", Font.PLAIN,10);
 		   pg.setFont(MyFont); 
          
-		   
-		  PrintIndexNumber(TOPLEFTX+120,TOPLEFTY,pg);
-		  PrintHeader(TOPLEFTX,TOPLEFTY+20,pg,pageno);
-		  PrintGridTitle(TOPLEFTX,TOPLEFTY+118,pg);
-		  PrintGridMain(TOPLEFTX,TOPLEFTY+118+linespacing,pg);
-		  PrintFooter(TOPLEFTX,TOPLEFTY+760,pg);
+		   String print_type=model.getPrintType();
+   	       System.out.print(print_type);
+   	       print_type=print_type.toUpperCase();
+   	       if(print_type.contains("PRACT"))
+   	       	{		 
+   	    	   PrintIndexNumber(TOPLEFTX+120,TOPLEFTY,pg);
+   	    	   PrintHeader(TOPLEFTX,TOPLEFTY+20,pg,pageno);
+   	    	   PrintGridTitle(TOPLEFTX,TOPLEFTY+118,pg);
+   	    	   PrintGridMain(TOPLEFTX,TOPLEFTY+118+linespacing,pg);
+   	    	   PrintFooter(TOPLEFTX,TOPLEFTY+760,pg);
 		 
-        
+   	         }
+   	       else
+   	       {
+		      PrintIndexNumber(TOPLEFTX+120,TOPLEFTY,pg);
+			  PrintHeaderOP(TOPLEFTX,TOPLEFTY+20,pg,pageno);
+			  PrintGridTitleOP(TOPLEFTX,TOPLEFTY+118,pg);
+			  PrintGridMainOP(TOPLEFTX,TOPLEFTY+118+linespacing,pg);
+			  PrintFooterOP(TOPLEFTX,TOPLEFTY+760,pg);
+   	       }
+		  
+		  
         
         System.out.println(pageno);
 		return PAGE_EXISTS;
@@ -389,9 +360,117 @@ public class PrintPractical implements Printable
 	   
 	   gr.drawString("1. Submit to Board with Practical Marksheet.   2. Write ABSENT with Red Ink   3. Write Extra No.s if any.",
 			   topleftx,toplefty);
-	
 	  
 	  }
+	 
+	 ////////////////////////ORAL-PROJECT FUNTIONS
+	 
+	 
+	 
+	 public void PrintHeaderOP(int topleftx,int toplefty,Graphics gr,int pageno)
+	  {linespacing=12;
+	     
+	  PrintBoxedString( "SSC/HSC",470,toplefty-30,55,10,gr);
+	  PrintBoxedString( "Form No. 3A",470,toplefty-20,55,10,gr);
+	  
+	  String StartSeatNo=rollArray.get(0);
+	  String EndSeatNo=rollArray.get(rollArray.size()-1);
+	   
+	   
+	   Centre(BoardName1,460,topleftx,toplefty,gr);
+	   toplefty+=linespacing;
+	   Centre(BoardName2,460,topleftx,toplefty,gr);
+	   toplefty+=linespacing;
+	   Centre(Standard+" - "+Type+" - "+MonthYear,460,topleftx,toplefty,gr);
+	   toplefty+=linespacing;
+	   //Centre("Attendance Sheet",460,topleftx,toplefty,gr);
+	   Centre("ORAL EXAM/PROJECT",460,topleftx,toplefty,gr);
+	   toplefty+=linespacing;
+	   Centre("FORM No. 3A",460,topleftx,toplefty,gr);
+	   toplefty+=linespacing;
+	   gr.drawString("Jr College/School Name : "+School,topleftx,toplefty);
+	   gr.drawString("Block No :  "+BatchNo,topleftx+380,toplefty);
+	  toplefty+=linespacing;
+	  gr.drawString("Subject : "+Subject,topleftx,toplefty);
+	  gr.drawString("Subject No : "+SubjectCode,topleftx+240,toplefty);
+	  gr.drawString("Medium : "+medium,topleftx+380,toplefty);
+	  
+	  
+	 
+	  toplefty+=linespacing;
+	  gr.drawString("Seat No.s : From  "+StartSeatNo+"  TO  "+EndSeatNo,topleftx,toplefty);
+	  gr.drawString("Date :  "+Det,topleftx+240,toplefty);
+	  gr.drawString("Time :  "+Tyme,topleftx+380,toplefty);
+	//  toplefty+=linespacing;
+	//  gr.drawString("Extra Seat No.s :",topleftx,toplefty);
+	  }
+	
+	 
+	 void PrintGridMainOP(int tlx,int tly,Graphics pg)
+	 {   String srno;
+	     int leftx;
+		 for(int i=0;i<32;i++)
+	       { if(i>=rollArray.size())  ///print empty grid
+	       {leftx=tlx;
+			 
+		     PrintBoxedString(" ",leftx,tly,colwidthOP[0],linespacing,pg);
+             leftx+=colwidthOP[0];	       
+		     PrintBoxedString(" ",leftx,tly,colwidthOP[1],linespacing,pg);
+		     leftx+=colwidthOP[1];
+		     PrintBoxedString(" ",leftx,tly,colwidthOP[2],linespacing,pg);
+		     leftx+=colwidthOP[2];
+		      PrintBoxedString("",leftx,tly,colwidthOP[3],linespacing,pg);
+		      tly+=linespacing;
+	    	   
+	       }
+	    	   
+	       else   ///print filled Grid
+	       {
+			 leftx=tlx;
+			 srno=String.format("%d",i+1);
+		     PrintBoxedString(srno,leftx,tly,colwidthOP[0],linespacing,pg);
+             leftx+=colwidthOP[0];	       
+		     PrintBoxedString(rollArray.get(i),leftx,tly,colwidthOP[1],linespacing,pg);
+		     leftx+=colwidthOP[1];
+		     PrintBoxedString("",leftx,tly,colwidthOP[2],linespacing,pg);
+		     leftx+=colwidthOP[2];
+		      PrintBoxedString("",leftx,tly,colwidthOP[3],linespacing,pg);
+		      tly+=linespacing;
+	       }
+	    }
+	 }
+	 
+	 
+	 
+	 public void PrintFooterOP(int topleftx,int toplefty,Graphics gr)
+	  {
+	     linespacing=12;
+	   gr.drawString("Supervisor's/Teacher's Name :",topleftx,toplefty);
+	   gr.drawString("Conductor's/Princpal's/Head Master's Signature : ",topleftx+250,toplefty);
+	
+	   toplefty+=linespacing;
+	   
+	   gr.drawString("Signature :",topleftx,toplefty); 
+	   gr.drawString("And Stamp :",topleftx+250,toplefty);
+	  
+	   toplefty+=linespacing+10;
+	   gr.drawString("Note : To be kept by Centre/School College conductor for one year after the declaration of the result",topleftx,toplefty);
+	   
+	  
+	  }
+	 
+	 void PrintGridTitleOP(int tlx,int tly,Graphics pg)
+	 {   linespacing=18;
+		 PrintBoxedString("Sr No",tlx,tly,colwidthOP[0],linespacing,pg);
+		 tlx+=colwidthOP[0];
+		 PrintBoxedString("Seat No",tlx,tly,colwidthOP[1],linespacing,pg);
+		 tlx+=colwidthOP[1];
+		 PrintBoxedString("Name of the Candidate",tlx,tly,colwidthOP[2],linespacing,pg);
+		 tlx+=colwidthOP[2];
+		 PrintBoxedString("Students's Signature",tlx,tly,colwidthOP[3],linespacing,pg);
+	 }
+	 
+	 
 	 
 	 
 	 

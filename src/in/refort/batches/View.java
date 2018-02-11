@@ -28,7 +28,6 @@ public class View {
     
     public View()
     {   
-    	
         
         ButtonHeaderRenderer renderer = new ButtonHeaderRenderer();
         TableColumnModel cmodel = table.getColumnModel();

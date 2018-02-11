@@ -113,11 +113,11 @@ public class PrintOral implements Printable
 		 pg.setFont(MyFont); 
          
 		  PrintIndexNumber(TOPLEFTX+120,TOPLEFTY,pg);
-		 
-		  PrintHeader(TOPLEFTX,TOPLEFTY+20,pg,pageno);
-		  PrintGridTitle(TOPLEFTX,TOPLEFTY+118,pg);
-		  PrintGridMain(TOPLEFTX,TOPLEFTY+118+linespacing,pg);
-		  PrintFooter(TOPLEFTX,TOPLEFTY+760,pg);
+		  
+		  PrintHeaderOP(TOPLEFTX,TOPLEFTY+20,pg,pageno);
+		  PrintGridTitleOP(TOPLEFTX,TOPLEFTY+118,pg);
+		  PrintGridMainOP(TOPLEFTX,TOPLEFTY+118+linespacing,pg);
+		  PrintFooterOP(TOPLEFTX,TOPLEFTY+760,pg);
 		 
         
         
@@ -197,7 +197,7 @@ public class PrintOral implements Printable
 	       }
 	 }
 	 
-	 public void PrintHeader(int topleftx,int toplefty,Graphics gr,int pageno)
+	 public void PrintHeaderOP(int topleftx,int toplefty,Graphics gr,int pageno)
 	  {linespacing=12;
 	     
 	  PrintBoxedString( "SSC/HSC",470,toplefty-30,55,10,gr);
@@ -250,7 +250,7 @@ public class PrintOral implements Printable
 	 }
 
 	 
-	 void PrintGridTitle(int tlx,int tly,Graphics pg)
+	 void PrintGridTitleOP(int tlx,int tly,Graphics pg)
 	 {   linespacing=18;
 		 PrintBoxedString("Sr No",tlx,tly,colwidth[0],linespacing,pg);
 		 tlx+=colwidth[0];
@@ -261,7 +261,7 @@ public class PrintOral implements Printable
 		 PrintBoxedString("Students's Signature",tlx,tly,colwidth[3],linespacing,pg);
 	 }
 	 
-	 void PrintGridMain(int tlx,int tly,Graphics pg)
+	 void PrintGridMainOP(int tlx,int tly,Graphics pg)
 	 {   String srno;
 	     int leftx;
 		 for(int i=0;i<32;i++)
@@ -297,7 +297,7 @@ public class PrintOral implements Printable
 	 
 	 
 	 
-	 public void PrintFooter(int topleftx,int toplefty,Graphics gr)
+	 public void PrintFooterOP(int topleftx,int toplefty,Graphics gr)
 	  {
 	     linespacing=12;
 	   gr.drawString("Supervisor's/Teacher's Name :",topleftx,toplefty);
